@@ -1,0 +1,88 @@
+# zsh configuration
+# 20140708
+
+setopt nohashdirs # avoid rehashing 
+setopt nohashcmds
+
+# completion system
+autoload -U compinit
+compinit
+
+eval `dircolors`
+zmodload -i zsh/complist
+zstyle ':completion:*' menu select=4 # colored completion menu (>3 items)
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
+zstyle ':completion:*' completer _complete _approximate _history
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' # case insensitive
+zstyle ':completion:*' max-errors 2 # approximate completion
+
+zstyle ':completion:*' group-name '' # other options from joerg's version
+setopt glob_complete
+#setopt menu_complete
+
+# history
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+
+setopt inc_append_history # share between sessions
+setopt hist_ignore_all_dups # no duplicates
+
+# spell correction
+setopt correct
+
+# prompts
+autoload -U colors
+colors
+
+prhost="%{$fg_bold[blue]%}[%m]%{$reset_color%}"
+pruser="%(!.%{$fg_bold[red]%}%n%{$reset_color%}.%n)"
+prdir="%{$fg_bold[blue]%}%~%{$reset_color%}"
+prprompt="%#"
+PROMPT="$prhost $pruser $prdir $prprompt " # left prompt
+
+prretpos="%{$fg_bold[green]%}0%{$reset_color%}";
+prretneg="%{$fg_bold[red]%}%?%{$reset_color%}";
+prret="%(0?.$prretpos.$prretneg)"
+RPROMPT="$prret" # right prompt
+
+prfrom="%{$fg_bold[red]%}%R%{$reset_color%}"
+prto="%{$fg_bold[green]%}%r%{$reset_color%}"
+prask="(yes/NO/edit/abort)?"
+SPROMPT="correct '$prfrom' to '$prto' $prask " # spell correction prompt
+
+REPORTTIME=5 # command time (>=5 seconds)
+
+# keys
+bindkey '^[[A' up-line-or-search # search in history
+bindkey '^[[B' down-line-or-search
+
+# aliases
+alias reload=". ~/.zshrc" # reload zsh (mainly for debugging)
+
+alias vi="vim" # vi improved
+
+alias ls="ls --group-directories-first --color=auto -lhv" # colored commands
+alias ll="ls --group-directories-first --color=auto -alhv"
+alias grep="grep --color=auto"
+
+alias cp="cp -v" # verbose commands
+alias mv="mv -v"
+
+alias nxfetch="~/projects/nexus/nxsync fetch" # nexus synchronization
+alias nxpush="~/projects/nexus/nxsync push"
+
+alias cal="cal -m" # calendar
+
+alias photorename="~/projects/photo/rename --user ks" # photo
+alias photoresize="~/projects/photo/resize"
+
+#alias ftb="cd ~/data/ftb; java -jar launcher^FTB_Launcher.jar" # gaming
+alias ftb="~/data/multimc/MultiMC"
+
+	# environment
+export EDITOR="vim"
+export PAGER="vimpager"
+
+

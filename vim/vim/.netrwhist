@@ -1,0 +1,10 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =8
+let g:netrw_dirhist_1='/home/ampe/nexus/vim/vim'
+let g:netrw_dirhist_2='/home/ampe/nexus/nexus'
+let g:netrw_dirhist_3='/etc/ssh'
+let g:netrw_dirhist_4='/home/ampe/nexus/nexus'
+let g:netrw_dirhist_5='/home/ampe/nexus/ves'
+let g:netrw_dirhist_6='/home/ampe/nexus/theme/vim/vim/syntax'
+let g:netrw_dirhist_7='/home/ampe/nexus/gafos/cda4'
+let g:netrw_dirhist_8='/home/ampe/nexus/gafos/cdp/klein'

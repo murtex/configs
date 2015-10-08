@@ -1,0 +1,106 @@
+
+""" commons
+set title
+set nowrap
+set linebreak
+set nolist
+set textwidth=0
+set wrapmargin=0
+set display=lastline
+set fileformats=unix
+set backupdir=/tmp
+set directory=/tmp
+
+""" theming
+set t_Co=256
+let g:erfurt_high_Contrast=1
+colors erfurt
+
+syntax on
+
+""" status line
+set statusline=%f\ %y\ %m%r%h%w
+set statusline+=%=
+set statusline+=[L:\ %l/%L]\ [C:\ %v]\ [%p%%]\ [%P]
+set laststatus=2
+
+""" searching
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+
+""" indention
+set backspace=indent,eol,start
+set tabstop=4
+
+filetype plugin indent on
+
+set autoindent
+set cindent
+set shiftwidth=4
+
+""" folding
+set foldmethod=syntax
+set foldlevel=0
+
+autocmd FileType conf,vim,lua,python,javascript setlocal foldmethod=indent
+autocmd FileType css setlocal foldmethod=marker
+
+let javaScript_fold=1
+
+""" tabs
+function! MoveTabLeft()
+	let curtab=tabpagenr()
+	if curtab > 1
+		let curtab=curtab-2
+		execute 'tabmove' curtab
+	endif
+endfunction
+
+function! MoveTabRight()
+	let curtab=tabpagenr()
+	execute 'tabmove' curtab
+endfunction
+
+map <C-h> :call MoveTabLeft()<CR>
+map <C-l> :call MoveTabRight()<CR>
+map <C-t> :tabnew<CR>
+
+""" latexsuite
+set grepprg=grep\ -nH\ $*
+let g:tex_flavor="latex"
+
+""" NERD
+let NERDCompactSexyComs=1
+
+let NERDTreeMouseMode=2
+let NERDTreeShowBookmarks=1
+let NERDTreeQuitOnOpen=1
+let NERDTreeWinPos="right"
+let NERDTreeWinSize=64
+let NERDTreeDirArrows=1
+
+map <F2> :NERDTreeToggle \| :silent NERDTreeMirror<CR>
+
+""" common keys
+set mouse=a
+
+let mapleader=','
+
+map <F9> :set wrap!<CR>
+map <C-F9> :set list!<CR>
+map <F12> :setlocal spell! spelllang=de,en<CR>
+
+" leave insert mode
+function LeaveInsert()
+	if col(".") > 1
+		call cursor(line("."), col(".") + 1)
+	endif
+endfunction
+
+imap <up> <esc><up>:call LeaveInsert()<CR>
+imap <down> <esc><down>:call LeaveInsert()<CR>
+imap <pageup> <esc><pageup>:call LeaveInsert()<CR>
+imap <pagedown> <esc><pagedown>:call LeaveInsert()<CR>
+
