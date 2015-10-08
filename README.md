@@ -1,25 +1,25 @@
 ##### awesome
 - `ln -s . ~/.config`
 
-#### conky
+##### conky
 - `ln -s $FILENAME ~/.conkyrc`
 
-#### fonts
+##### fonts
 - `ln -s $FILENAME /etc/fonts/local.conf`
 
-#### slim
+##### slim
 - `ln -s $FILENAME /usr/share/slim/themes/`
 
-#### terminator
+##### terminator
 - `ln -s $FILENAME ~/.config/terminator`
 
-#### vim
+##### vim
 - `ln -s $FILENAME ~/.vim`
 - `ln -s $FILENAME ~/.vimrc`
 
-#### xinit
+##### xinit
 - `ln -s $FILENAME ~/.xinitrc`
 
-#### zsh
+##### zsh
 - `ln -s $FILENAME ~/.zshrc`
 
