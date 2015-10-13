@@ -7,6 +7,10 @@
 ##### fonts
 - `ln -s $FILENAME /etc/fonts/local.conf`
 
+##### gtk
+- `ln -s $FILENAME /etc/gtk-2.0/gtkrc`
+- `ln -s $FILENAME /etc/gtk-3.0/settings.ini`
+
 ##### slim
 - `ln -s $FILENAME /usr/share/slim/themes/`
 
