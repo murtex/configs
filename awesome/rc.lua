@@ -483,7 +483,9 @@ client.connect_signal( "unfocus",
 client.connect_signal( "tagged",
 	function ( c, t )
 		clients = getclients( t )
-		if #clients > 1 then
+		if #clients == 1 then
+			awful.titlebar.hide( clients[1] )
+		elseif #clients > 1 then
 			for _, c in pairs( clients ) do
 				awful.titlebar.show( c )
 			end
@@ -495,6 +497,10 @@ client.connect_signal( "untagged",
 		clients = getclients( t )
 		if #clients == 1 then
 			awful.titlebar.hide( clients[1] )
+		elseif #clients > 1 then
+			for _, c in pairs( clients ) do
+				awful.titlebar.show( c )
+			end
 		end
 	end
 )
