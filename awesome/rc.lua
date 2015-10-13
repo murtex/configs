@@ -64,6 +64,11 @@ local app_mailclient = {"evolution", "Evolution"}
 local app_calculator = {"gnome-calculator", "Gnome-calculator"}
 local app_dictionary = {"dudenbib", "Dudenbib.bin"}
 
+	-- conky
+conky_class = "conky"
+conky_start = "conky"
+conky_stop = "killall conky"
+
 	-- helpers
 function launch( cmd, classname )
 
@@ -71,7 +76,7 @@ function launch( cmd, classname )
 	if classname ~= "" then
 		local matched = nil -- find class name match
 		local clients = client.get()
-		for i, c in pairs( clients ) do
+		for _, c in pairs( clients ) do
 			local m = true
 			for k, v in pairs( {class=classname} ) do
 				if c[k] ~= v and not c[k]:find( v ) then
@@ -98,10 +103,17 @@ function launch( cmd, classname )
 
 end
 
-	-- conky
-conky_class = "conky"
-conky_start = "conky"
-conky_stop = "killall conky"
+function getclients( tag )
+	clients = {}
+
+	for _, c in pairs( tag:clients() ) do
+		if c.class ~= conky_class and not c.modal then
+			clients[#clients+1] = c
+		end
+	end
+
+	return clients
+end
 
 	-- startup
 if awesome.startup_errors then
@@ -408,7 +420,7 @@ awful.rules.rules = {
 client.connect_signal( "manage",
 	function ( c, startup )
 
-			-- titlebar
+			-- create titlebar
 		if c.class ~= conky_class then
 
 				-- left (close)
@@ -445,7 +457,14 @@ client.connect_signal( "manage",
 			bar:set_left( bar_left )
 			bar:set_right( bar_right )
 			bar:set_middle( bar_middle )
+
 			awful.titlebar( c ):set_widget( bar )
+
+			local tag = c:tags()[1]
+			if #getclients( tag ) == 1 and not c.modal then
+				awful.titlebar.hide( c )
+			end
+
 		end
 
 	end
@@ -459,6 +478,25 @@ client.connect_signal( "focus",
 client.connect_signal( "unfocus",
 	function ( c )
 		c.border_color = beautiful.border_normal
+	end
+)
+
+client.connect_signal( "tagged",
+	function ( c, t )
+		clients = getclients( t )
+		if #clients > 1 then
+			for _, c in pairs( clients ) do
+				awful.titlebar.show( c )
+			end
+		end
+	end
+)
+client.connect_signal( "untagged",
+	function ( c, t )
+		clients = getclients( t )
+		if #clients == 1 then
+			awful.titlebar.hide( clients[1] )
+		end
 	end
 )
 
