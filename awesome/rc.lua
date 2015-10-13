@@ -460,8 +460,7 @@ client.connect_signal( "manage",
 
 			awful.titlebar( c ):set_widget( bar )
 
-			local tag = c:tags()[1]
-			if #getclients( tag ) == 1 and not c.modal then
+			if #getclients( c:tags()[1] ) == 1 and not c.modal then
 				awful.titlebar.hide( c )
 			end
 
