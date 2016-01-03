@@ -16,7 +16,10 @@ set t_Co=256
 let g:erfurt_high_Contrast=1
 colors erfurt
 
+""" syntax highlighting
 syntax on
+
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
 """ status line
 set statusline=%f\ %y\ %m%r%h%w
