@@ -483,7 +483,7 @@ client.connect_signal( "unfocus",
 client.connect_signal( "tagged",
 	function ( c, t )
 		clients = getclients( t )
-		if #clients == 1 then
+		if #clients == 1 then -- updated title bar visibility
 			awful.titlebar.hide( clients[1] )
 		elseif #clients > 1 then
 			for _, c in pairs( clients ) do
@@ -495,12 +495,14 @@ client.connect_signal( "tagged",
 client.connect_signal( "untagged",
 	function ( c, t )
 		clients = getclients( t )
-		if #clients == 1 then
+		if #clients == 1 then -- update title bar visibility
 			awful.titlebar.hide( clients[1] )
 		elseif #clients > 1 then
 			for _, c in pairs( clients ) do
 				awful.titlebar.show( c )
 			end
+		elseif #client == 0 then -- reset tiling
+			awful.tag.setproperty( awful.tag.selected(), "mwfact", 0.5 );
 		end
 	end
 )
