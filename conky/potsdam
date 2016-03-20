@@ -34,6 +34,7 @@ color1 7e9d9e
 color2 dfaf8f
 
 # output
+# governor: ${alignr}${execi 60 cpupower frequency-info -p | sed '1d' | sed -e 's/^\w*\ *//' -e 's/^\w*\ *//'}
 TEXT
 ${color1}${font monospace:size=26}${alignc}${time %I:%M %p}${font}${color}
 
@@ -49,7 +50,7 @@ updates: ${alignr}${execi 3600 checkupdates | wc -l}
 ${color1}CPU ${hr}${color}
 core1: ${color1}${cpubar cpu1}${color}
 core2: ${color1}${cpubar cpu2}${color}
-governor: ${alignr}${execi 60 cpupower frequency-info -p | sed '1d' | sed -e 's/^\w*\ *//' -e 's/^\w*\ *//'}
+governor: ${alignr}${execi 60 cpupower frequency-info -p | awk -F '"' '{print $2}' | sed '/^$/d'}
 frequency: ${alignr}${freq_g cpu0}GHz
 
 ${color1}SENSORS ${hr}${color}
