@@ -240,7 +240,7 @@ local keys_global = awful.util.table.join(
 			launch( app_terminal[1], app_terminal[2] )
 		end
 	),
-	awful.key( {"Control", "Shift"}, "t", -- additional terminal command
+	awful.key( {"Mod1", "Shift"}, "t", -- additional terminal command
 		function ()
 			launch( app_terminal[1], app_terminal[2] )
 		end
