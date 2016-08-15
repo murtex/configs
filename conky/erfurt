@@ -6,7 +6,7 @@ format_human_readable yes
 no_buffers yes
 total_run_times 0
 if_up_strictness link
-top_cpu_separate no
+top_cpu_separate yes
 
 alignment br # geometry
 minimum_size 275 300
