@@ -3,6 +3,7 @@
 
 ##### conky
 - `ln -s $FILENAME ~/.conkyrc`
+- `lm -s conky.lua ~/.conky.lua`
 
 ##### fonts
 - `ln -s $FILENAME /etc/fonts/local.conf`
