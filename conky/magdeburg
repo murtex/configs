@@ -1,0 +1,113 @@
+
+lua_load ~/.conky.lua # general
+update_interval 2.5
+double_buffer yes
+format_human_readable yes
+no_buffers yes
+total_run_times 0
+if_up_strictness link
+top_cpu_separate yes
+
+alignment br # geometry
+minimum_size 275 300
+border_outer_margin 5
+border_inner_margin 15
+gap_x 30
+gap_y 30
+
+own_window yes # window
+own_window_type desktop
+own_window_hints undecorated, below, sticky, skip_taskbar, skip_pager
+own_window_argb_visual yes
+own_window_argb_value 255
+
+use_xft yes # fonts
+xftfont monospace:size=9
+xftalpha 1
+
+draw_shades no # design
+draw_outline no
+draw_borders yes
+draw_graph_borders yes
+
+own_window_colour 1c1c1c # zenburn
+default_color dcdccc
+color1 7e9d9e
+color2 dfaf8f
+
+#${endif}\ # wifi backup
+#${if_up wlp0s18f2u4}\
+#wlp0s18f2u4: ${alignr}${addr wlp0s18f2u4}
+#essid: ${alignr}${wireless_essid wlp0s18f2u4}
+#up: (${totalup wlp0s18f2u4} total) ${alignr}${upspeedf wlp0s18f2u4}KiB/s
+#down: (${totaldown wlp0s18f2u4} total) ${alignr}${downspeedf wlp0s18f2u4}KiB/s
+
+#${endif}\
+#${if_up wlp0s18f2u4ap}\
+#wlp0s18f2u4ap: ${alignr}${addr wlp0s18f2u4ap}
+#essid: ${alignr}kickp-ibss
+#up: (${totalup wlp0s18f2u4ap} total) ${alignr}${upspeedf wlp0s18f2u4ap}KiB/s
+#down: (${totaldown wlp0s18f2u4ap} total) ${alignr}${downspeedf wlp0s18f2u4ap}KiB/s
+#${endif}\
+
+# output
+# governor: ${alignr}${execi 60 cpupower frequency-info -p | sed '1d' | sed -e 's/^\w*\ *//' -e 's/^\w*\ *//'}
+TEXT
+${color1}${font monospace:size=30}${alignc}${time %I:%M %p}${font}${color}
+
+${alignc}${time %A, %B %d (%V)}
+
+
+${alignc}${execpi 600 cal -m | sed -e '1d' -e "s/\<$(date +%-d)\>/\${color1}&\${color}/" -e 's/^/${alignc}/'}
+
+${color1}${lua_parse uppercase ${nodename}} ${hr}${color}
+uptime: ${alignr}${uptime_short}
+updates: ${alignr}${lua_parse format %5i ${execi 3600 checkupdates | wc -l}}
+
+${color1}CPU ${hr}${color}
+${top name 1} ${alignr}${lua_parse format %.1f ${top cpu 1}}%
+${top name 2} ${alignr}${lua_parse format %.1f ${top cpu 2}}%
+${top name 3} ${alignr}${lua_parse format %.1f ${top cpu 3}}%
+${top name 4} ${alignr}${lua_parse format %.1f ${top cpu 4}}%
+${top name 5} ${alignr}${lua_parse format %.1f ${top cpu 5}}%
+
+core1: ${color1}${cpubar cpu1}${color}
+core2: ${color1}${cpubar cpu2}${color}
+core3: ${color1}${cpubar cpu3}${color}
+core4: ${color1}${cpubar cpu4}${color}
+governor: ${alignr}${execi 60 cpupower frequency-info -p | awk -F '"' '{print $2}' | sed '/^$/d'}
+frequency: ${alignr}${freq_g cpu0}GHz
+
+${color1}SENSORS ${hr}${color}
+hwmon2/temp1: ${alignr}${hwmon 2 temp 1}°C
+hwmon2/temp2: ${alignr}${hwmon 2 temp 2}°C
+
+${color1}MEMORY ${hr}${color}
+${top_mem name 1} ${alignr}${lua_parse format %.1f ${top_mem mem_res 1}}
+${top_mem name 2} ${alignr}${lua_parse format %.1f ${top_mem mem_res 2}}
+${top_mem name 3} ${alignr}${lua_parse format %.1f ${top_mem mem_res 3}}
+${top_mem name 4} ${alignr}${lua_parse format %.1f ${top_mem mem_res 4}}
+${top_mem name 5} ${alignr}${lua_parse format %.1f ${top_mem mem_res 5}}
+
+swap: (${swapmax} total) ${alignr}${lua_parse format %.2f ${swap}}
+${color1}${swapbar}${color}
+ram: (${memmax} total) ${alignr}${lua_parse format %.2f ${mem}}
+${color1}${membar}${color}
+
+${color1}NETWORK ${hr}${color}
+${if_up enp2s0}\
+enp2s0: ${alignr}${addr enp2s0}
+up: (${totalup enp2s0} total) ${alignr}${upspeedf enp2s0}KiB/s
+down: (${totaldown enp2s0} total) ${alignr}${downspeedf enp2s0}KiB/s
+
+${endif}\
+${if_up wlp3s0}\
+wlp3s0: ${alignr}${addr wlp3s0}
+essid: ${alignr}${wireless_essid wlp3s0}
+up: (${totalup wlp3s0} total) ${alignr}${upspeedf wlp3s0}KiB/s
+down: (${totaldown wlp3s0} total) ${alignr}${downspeedf wlp3s0}KiB/s
+
+${endif}\
+${color1}BATTERY ${hr}${color}
+time: ${alignr}${battery_time BAT0}
+${color1}${battery_bar BAT0}
