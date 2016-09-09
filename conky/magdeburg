@@ -1,6 +1,6 @@
 
 lua_load ~/.conky.lua # general
-update_interval 2.5
+update_interval 5
 double_buffer yes
 format_human_readable yes
 no_buffers yes
