@@ -57,7 +57,6 @@ ${color1}${font monospace:size=30}${alignc}${time %I:%M %p}${font}${color}
 
 ${alignc}${time %A, %B %d (%V)}
 
-
 ${alignc}${execpi 600 cal -m | sed -e '1d' -e "s/\<$(date +%-d)\>/\${color1}&\${color}/" -e 's/^/${alignc}/'}
 
 ${color1}${lua_parse uppercase ${nodename}} ${hr}${color}
@@ -79,6 +78,7 @@ governor: ${alignr}${execi 60 cpupower frequency-info -p | awk -F '"' '{print $2
 frequency: ${alignr}${freq_g cpu0}GHz
 
 ${color1}SENSORS ${hr}${color}
+fan: ${alignr}${platform thinkpad_hwmon fan 1} rpm
 hwmon2/temp1: ${alignr}${hwmon 2 temp 1}°C
 hwmon2/temp2: ${alignr}${hwmon 2 temp 2}°C
 

@@ -45,7 +45,7 @@ set shiftwidth=4
 
 """ folding
 set foldmethod=syntax
-set foldlevel=0
+set foldlevel=99
 
 autocmd FileType conf,vim,lua,python,javascript setlocal foldmethod=indent
 autocmd FileType css setlocal foldmethod=marker
