@@ -13,6 +13,7 @@ xrandr --dpi 84
 	
 	# keyboard
 xset r rate 250 30
+setxkbmap de nodeadkeys
 
 	# awesome wm
 exec awesome

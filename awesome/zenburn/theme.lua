@@ -18,25 +18,27 @@ theme.wallpaper = dir_theme .. "background.png"
 theme.font      = "sans-serif 8"
 
 -- {{{ Colors
-theme.fg_normal  = "#DCDCCC"
-theme.fg_focus   = "#F0DFAF"
-theme.fg_urgent  = "#CC9393"
 theme.bg_normal  = "#3F3F3F"
-theme.bg_focus   = "#1E2320"
-theme.bg_urgent  = "#3F3F3F"
-theme.bg_systray = theme.bg_normal
+theme.fg_normal  = "#DCDCCC"
+theme.bg_focus   = "#4F4F4F"
+theme.fg_focus   = "#F0DFAF"
+theme.bg_urgent  = "#6F6F6F"
+theme.fg_urgent  = "#CC9393"
+theme.bg_systray = "#1E2320"
 -- }}}
 
 -- {{{ Borders
-theme.border_width  = 0
-theme.border_normal = "#3F3F3F"
-theme.border_focus  = "#6F6F6F"
-theme.border_marked = "#CC9393"
+theme.border_width  = 4
+theme.tooltip_border_width = 1
+theme.border_normal  = theme.bg_systray
+theme.border_focus = theme.bg_systray
+theme.border_marked = theme.bg_systray
 -- }}}
 
 -- {{{ Titlebars
-theme.titlebar_bg_focus  = "#6f6f6f"
-theme.titlebar_bg_normal = "#3f3f3f"
+--[[theme.titlebar_bg_normal = theme.bg_focus
+   [theme.titlebar_bg_focus  = "#6f6f6f"
+   [theme.titlebar_bg_focus  = theme.bg_normal]]
 -- }}}
 
 -- There are other variable sets

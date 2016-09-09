@@ -23,10 +23,10 @@ end
 naughty.config.defaults.font = beautiful.font
 naughty.config.defaults.fg = beautiful.fg_normal
 naughty.config.defaults.bg = beautiful.bg_normal
+naughty.config.defaults.border_width = beautiful.tooltip_border_width
 naughty.config.defaults.border_color = beautiful.border_normal
-naughty.config.defaults.border_width = beautiful.border_width
 
-naughty.config.presets.critical.fg = beautiful.bg_normal
+naughty.config.presets.critical.fg = beautiful.fg_urgent
 
 function notify_err( err, nid_repl )
 	nid_repl = nid_repl or nil
@@ -55,12 +55,12 @@ local nid_xrandr = nil
 local nid_layout = nil
 
 	-- variables
-local app_prompt = {"dmenu_run -b -p \"run: \" -nb \"" .. beautiful.bg_normal .."\" -nf \"" .. beautiful.fg_normal .. "\" -sb \"" .. beautiful.bg_focus .. "\" -sf \"" .. beautiful.fg_focus .. "\" -fn \"Liberation Mono-11\"", ""}
+local app_prompt = {"dmenu_run -b -p \"run: \" -nb \"" .. beautiful.bg_systray .."\" -nf \"" .. beautiful.fg_normal .. "\" -sb \"" .. beautiful.bg_focus .. "\" -sf \"" .. beautiful.fg_focus .. "\" -fn \"Liberation Mono-11\"", ""}
 local app_terminal = {"terminator", ""}
 local app_filemanager = {"nautilus", ""}
 local app_audiomanager = {"audacious", "Audacious"}
 local app_webbrowser = {"firefox", "Firefox"}
-local app_mailclient = {"evolution", "Evolution"}
+local app_mailclient = {"sylpheed", "Sylpheed"}
 local app_calculator = {"gnome-calculator", "Gnome-calculator"}
 local app_dictionary = {"dudenbib", "Dudenbib.bin"}
 
@@ -465,10 +465,18 @@ client.connect_signal( "manage",
 
 			awful.titlebar( c ):set_widget( bar )
 
-			if #getclients( c:tags()[1] ) == 1 and not c.modal then
+			--[[if #getclients( c:tags()[1] ) == 1 and not c.modal then
+			   [    awful.titlebar.hide( c )
+			   [end]]
+			if not c.modal then
 				awful.titlebar.hide( c )
 			end
 
+		end
+
+			-- adjust modal border
+		if c.modal then
+			c.border_width = 0;
 		end
 
 	end
@@ -485,30 +493,30 @@ client.connect_signal( "unfocus",
 	end
 )
 
-client.connect_signal( "tagged",
-	function ( c, t )
-		clients = getclients( t )
-		if #clients == 1 then -- updated title bar visibility
-			awful.titlebar.hide( clients[1] )
-		elseif #clients > 1 then
-			for _, c in pairs( clients ) do
-				awful.titlebar.show( c )
-			end
-		end
-	end
-)
-client.connect_signal( "untagged",
-	function ( c, t )
-		clients = getclients( t )
-		if #clients == 1 then -- update title bar visibility
-			awful.titlebar.hide( clients[1] )
-		elseif #clients > 1 then
-			for _, c in pairs( clients ) do
-				awful.titlebar.show( c )
-			end
-		elseif #client == 0 then -- reset tiling
-			awful.tag.setproperty( awful.tag.selected(), "mwfact", 0.5 );
-		end
-	end
-)
+--[[client.connect_signal( "tagged",
+   [    function ( c, t )
+   [        clients = getclients( t )
+   [        if #clients == 1 then -- updated title bar visibility
+   [            awful.titlebar.hide( clients[1] )
+   [        elseif #clients > 1 then
+   [            for _, c in pairs( clients ) do
+   [                awful.titlebar.show( c )
+   [            end
+   [        end
+   [    end
+   [)
+   [client.connect_signal( "untagged",
+   [    function ( c, t )
+   [        clients = getclients( t )
+   [        if #clients == 1 then -- update title bar visibility
+   [            awful.titlebar.hide( clients[1] )
+   [        elseif #clients > 1 then
+   [            for _, c in pairs( clients ) do
+   [                awful.titlebar.show( c )
+   [            end
+   [        elseif #client == 0 then -- reset tiling
+   [            awful.tag.setproperty( awful.tag.selected(), "mwfact", 0.5 );
+   [        end
+   [    end
+   [)]]
 

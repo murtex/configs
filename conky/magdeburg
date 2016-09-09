@@ -109,5 +109,5 @@ down: (${totaldown wlp3s0} total) ${alignr}${downspeedf wlp3s0}KiB/s
 
 ${endif}\
 ${color1}BATTERY ${hr}${color}
-time: ${alignr}${battery_time BAT0}
+${lua_parse battery ${battery BAT0} ${battery_time BAT0}}
 ${color1}${battery_bar BAT0}
