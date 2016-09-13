@@ -73,6 +73,7 @@ map <C-t> :tabnew<CR>
 """ latexsuite
 set grepprg=grep\ -nH\ $*
 let g:tex_flavor="latex"
+let g:Tex_HotKeyMappings = "itemize, align"
 
 """ NERD
 let NERDCompactSexyComs=1

@@ -27,6 +27,7 @@ naughty.config.defaults.border_width = beautiful.tooltip_border_width
 naughty.config.defaults.border_color = beautiful.border_normal
 
 naughty.config.presets.critical.fg = beautiful.fg_urgent
+naughty.config.presets.critical.bg = beautiful.bg_normal
 
 function notify_err( err, nid_repl )
 	nid_repl = nid_repl or nil
@@ -61,7 +62,7 @@ local app_filemanager = {"nautilus", ""}
 local app_audiomanager = {"audacious", "Audacious"}
 local app_webbrowser = {"firefox", "Firefox"}
 local app_mailclient = {"sylpheed", "Sylpheed"}
-local app_calculator = {"gnome-calculator", "Gnome-calculator"}
+local app_calc = {"galculator", "Galculator"}
 local app_dictionary = {"dudenbib", "Dudenbib.bin"}
 
 	-- conky
@@ -210,6 +211,11 @@ function xrandr_switch()
 	xrandr_timer:start()
 end
 
+function screen_shot()
+	--[[awful.util.spawn_with_shell( "maim -s -c 1,0,0,0.6 -p 10 ~/tmp/$(date +%Y%m%d-%H%M%S).png" )]]
+	awful.util.spawn_with_shell( "maim -i $(xdotool getactivewindow) ~/tmp/$(date +%Y%m%d-%H%M%S).png" )
+end
+
 	-- mouse bindings
 local buttons_global = awful.util.table.join(
 )
@@ -274,7 +280,7 @@ local keys_global = awful.util.table.join(
 	),
 	awful.key( {"Mod4", "Shift"}, "c",
 		function ()
-			launch( app_calculator[1], app_calculator[2] )
+			launch( app_calc[1], app_calc[2] )
 		end
 	),
 	awful.key( {"Mod4", "Shift"}, "a",
@@ -315,6 +321,7 @@ local keys_global = awful.util.table.join(
 
 		-- display
 	awful.key( {}, "XF86Display", xrandr_switch ),
+	awful.key( {"Mod4"}, "p", screen_shot ),
 
 		-- conky
 	awful.key( {"Mod4"}, "c",
@@ -425,6 +432,21 @@ awful.rules.rules = {
 		buttons=buttons_client
 	}},
 
+		-- calculator
+	{rule={class=app_calc[2]}, properties={
+		border_width=beautiful.border_width,
+		border_color=beautiful.border_normal,
+		focus=awful.client.focus.filter, 
+		floating=true,
+		raise=true, 
+		ontop=true,
+		maximized_vertical=false, 
+		maximized_horizontal=false, 
+		keys=keys_client, 
+		buttons=buttons_client,
+		size_hints={"program_position", "program_size"}
+	}},
+
 		-- conky
 	{rule={class=conky_class}, properties={
 		border_width=0,
@@ -483,14 +505,14 @@ client.connect_signal( "manage",
 			--[[if #getclients( c:tags()[1] ) == 1 and not c.modal then
 			   [    awful.titlebar.hide( c )
 			   [end]]
-			if not c.modal then
+			if not c.modal and c.class ~= app_calc[2] then
 				awful.titlebar.hide( c )
 			end
 
 		end
 
 			-- adjust modal border
-		if c.modal then
+		if c.modal or c.class == app_calc[2] then
 			c.border_width = 0;
 		end
 

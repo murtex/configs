@@ -78,6 +78,8 @@ alias cal="cal -m" # calendar
 alias photorename="~/projects/photo/rename --user ks" # photo
 alias photoresize="~/projects/photo/resize"
 
+alias qiv="qiv -BINtpT"
+
 #alias ftb="cd ~/data/ftb; java -jar launcher^FTB_Launcher.jar" # gaming
 alias ftb="~/data/multimc/MultiMC"
 

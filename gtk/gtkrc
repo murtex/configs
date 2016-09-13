@@ -1,2 +1,3 @@
 gtk-font-name = "sans-serif 9"
+gtk-can-change-accels = 1
 
