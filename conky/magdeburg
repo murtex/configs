@@ -103,7 +103,7 @@ down: (${totaldown enp2s0} total) ${alignr}${downspeedf enp2s0}KiB/s
 ${endif}\
 ${if_up wlp3s0}\
 wlp3s0: ${alignr}${addr wlp3s0}
-essid: ${alignr}${wireless_essid wlp3s0}
+essid: ${alignr}${wireless_essid wlp3s0} (${wireless_link_qual_perc wlp3s0}%)
 up: (${totalup wlp3s0} total) ${alignr}${upspeedf wlp3s0}KiB/s
 down: (${totaldown wlp3s0} total) ${alignr}${downspeedf wlp3s0}KiB/s
 

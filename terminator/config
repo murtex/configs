@@ -20,7 +20,7 @@
     background_color = "#1c1c1c"
     background_image = None
     cursor_color = "#dcdcdc"
-    font = Liberation Mono 11
+    font = Liberation Mono 9
     foreground_color = "#dcdcdc"
     palette = "#1c1c1c:#cc9393:#7f9f7f:#e3ceab:#8cd0d3:#cc9393:#dfaf8f:#dcdccc:#1c1c1c:#cc9393:#7f9f7f:#e3ceab:#8cd0d3:#cc9393:#dfaf8f:#dcdccc"
     scrollback_infinite = True

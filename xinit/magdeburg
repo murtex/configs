@@ -9,14 +9,20 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
 fi
 
 	# display
+xset s off
 xrandr --dpi 84
 dispwin ~/.color/icm/LP125WH2-TLB2-2013-02-13T143502-6500K-sRGB-100_-trc.icm
 	
 	# keyboard
 xset r rate 250 30
+
 setxkbmap de nodeadkeys
+
 xmodmap -e "keycode 21 = less greater less greater bar brokenbar bar"
 xmodmap -e "keycode 94 = acute grave acute grave cedilla cedilla cedilla"
+
+	# gtk
+export GTK_OVERLAY_SCROLLING=0
 
 	# awesome wm
 exec awesome

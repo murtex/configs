@@ -55,7 +55,7 @@ local nid_xrandr = nil
 local nid_layout = nil
 
 	-- variables
-local app_prompt = {"dmenu_run -b -p \"run: \" -nb \"" .. beautiful.bg_systray .."\" -nf \"" .. beautiful.fg_normal .. "\" -sb \"" .. beautiful.bg_focus .. "\" -sf \"" .. beautiful.fg_focus .. "\" -fn \"Liberation Mono-11\"", ""}
+local app_prompt = {"dmenu_run -b -p \"run: \" -nb \"" .. beautiful.bg_systray .."\" -nf \"" .. beautiful.fg_normal .. "\" -sb \"" .. beautiful.bg_focus .. "\" -sf \"" .. beautiful.fg_focus .. "\" -fn \"Liberation Mono-9\"", ""}
 local app_terminal = {"terminator", ""}
 local app_filemanager = {"nautilus", ""}
 local app_audiomanager = {"audacious", "Audacious"}
@@ -149,9 +149,21 @@ local tags = {
 }
 for i = 1, screen.count() do
 	tags[i] = awful.tag( tags.names, i, layouts[1] )
-	--for n = 1, #tags.names do
-		--awful.tag.setproperty( tags[i][n], "mwfact", 0.6 )
-	--end
+	for n = 1, #tags.names do
+		awful.tag.setproperty( tags[i][n], "mwfact", 0.55 )
+	end
+end
+
+	-- keyboard layout
+local xkb_cur = 1;
+
+function xkb_toggle()
+	xkb_cur = 1-xkb_cur; -- toggle state
+	if xkb_cur == 0 then
+		awful.util.spawn_with_shell( "setxkbmap -variant \"\"" )
+	else
+		awful.util.spawn_with_shell( "setxkbmap -variant nodeadkeys" )
+	end
 end
 
 	-- display, TODO: avoid hard-coding!
@@ -159,7 +171,7 @@ local xrandr_cur = 1
 local xrandr_timer = nil
 local xrandr_mode = "`xrandr --query | awk '/^ *[0-9]*x[0-9]*/{ print $1 }' | sort -n | uniq -d | tail -1`"
 local xrandr_state = {{}}
-xrandr_state[1] = {"intern only", "xrandr --output VIRTUAL1 --off --output LVDS1 --mode 1024x576 --pos 0x0 --rotate normal --output VGA1 --off"}
+xrandr_state[1] = {"intern only", "xrandr --output VIRTUAL1 --off --output LVDS1 --mode 1366x768 --pos 0x0 --rotate normal --output VGA1 --off"}
 xrandr_state[2] = {"extern only", xrandr_state[1][2] .. "; xrandr --output LVDS1 --off --output VGA1 --auto --pos 0x0 --rotate normal"}
 xrandr_state[3] = {"cloned min", xrandr_state[1][2] .. "; xrandr --output LVDS1 --mode " .. xrandr_mode .. " --pos 0x0 --rotate normal --output VGA1 --mode " .. xrandr_mode .. " --pos 0x0 --rotate normal"}
 xrandr_state[4] = {"cloned max", xrandr_state[1][2] .. "; xrandr --output VGA1 --auto --pos 0x0 --rotate normal"}
@@ -298,8 +310,11 @@ local keys_global = awful.util.table.join(
 		end
 	),
 
+		-- keyboard
+	awful.key( {"Mod4"}, "l", xkb_toggle ),
+
 		-- display
-	awful.key( {"Control"}, "XF86Display", xrandr_switch ),
+	awful.key( {}, "XF86Display", xrandr_switch ),
 
 		-- conky
 	awful.key( {"Mod4"}, "c",

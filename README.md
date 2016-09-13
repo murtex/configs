@@ -2,11 +2,11 @@
 - `ln -s . ~/.config`
 
 ##### conky
-- `ln -s $FILENAME ~/.conkyrc`
-- `lm -s conky.lua ~/.conky.lua`
+- `ln -s $HOSTNAME ~/.conkyrc`
+- `ln -s conky.lua ~/.conky.lua`
 
 ##### fonts
-- `ln -s $FILENAME /etc/fonts/local.conf`
+- `ln -s $HOSTNAME /etc/fonts/local.conf`
 
 ##### gtk
 - `ln -s $FILENAME /etc/gtk-2.0/gtkrc`
