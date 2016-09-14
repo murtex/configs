@@ -10,6 +10,7 @@ set display=lastline
 set fileformats=unix
 set backupdir=/tmp
 set directory=/tmp
+set autoread
 
 """ theming
 set t_Co=256
@@ -73,7 +74,6 @@ map <C-t> :tabnew<CR>
 """ latexsuite
 set grepprg=grep\ -nH\ $*
 let g:tex_flavor="latex"
-let g:Tex_HotKeyMappings = "itemize, align"
 
 """ NERD
 let NERDCompactSexyComs=1
