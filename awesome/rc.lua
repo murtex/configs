@@ -513,7 +513,7 @@ client.connect_signal( "manage",
 
 			-- adjust modal border
 		if c.modal or c.class == app_calc[2] then
-			c.border_width = 0;
+			c.border_width = 0; -- beautiful.tooltip_border_width;
 		end
 
 	end

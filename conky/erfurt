@@ -53,7 +53,7 @@ color2 dfaf8f
 # output
 # governor: ${alignr}${execi 60 cpupower frequency-info -p | sed '1d' | sed -e 's/^\w*\ *//' -e 's/^\w*\ *//'}
 TEXT
-${color1}${font monospace:size=26}${alignc}${time %I:%M %p}${font}${color}
+${color1}${font monospace:size=30}${alignc}${time %I:%M %p}${font}${color}
 
 ${alignc}${time %A, %B %d (%V)}
 
