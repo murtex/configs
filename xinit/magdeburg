@@ -21,6 +21,8 @@ setxkbmap de nodeadkeys
 xmodmap -e "keycode 21 = less greater less greater bar brokenbar bar"
 xmodmap -e "keycode 94 = acute grave acute grave cedilla cedilla cedilla"
 
+xbindkeys
+
 	# gtk
 export GTK_OVERLAY_SCROLLING=0
 

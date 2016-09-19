@@ -36,6 +36,8 @@ xrandr --dpi 102
 	# keyboard
 xset r rate 250 30
 
+xbindkeys
+
 	# dbus, TODO: both lines do the same! only last one works!
 #source /etc/X11/xinit/xinitrc.d/30-dbus
 #eval $(/usr/bin/dbus-launch --sh-syntax --exit-with-session)

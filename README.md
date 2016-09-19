@@ -23,7 +23,8 @@
 - `ln -s $FILENAME ~/.vimrc`
 
 ##### xinit
-- `ln -s $FILENAME ~/.xinitrc`
+- `ln -s $HOSTNAME ~/.xinitrc`
+- `ln -s xbindkeysrc ~/.xbindkeysrc`
 
 ##### zsh
 - `ln -s $FILENAME ~/.zshrc`
