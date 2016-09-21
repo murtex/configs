@@ -80,7 +80,7 @@ function launch( cmd, classname )
 		for _, c in pairs( clients ) do
 			local m = true
 			for k, v in pairs( {class=classname} ) do
-				if c[k] ~= v and not c[k]:find( v ) then
+				if c[k] ~= v then --and not c[k]:find( v ) then
 					m = false
 					break
 				end
@@ -431,6 +431,20 @@ awful.rules.rules = {
 		keys=keys_client, 
 		buttons=buttons_client
 	}},
+
+		-- qiv
+	--[[{rule={name="qiv"}, properties={
+	   [    border_width=beautiful.border_width,
+	   [    border_color=beautiful.border_normal,
+	   [    focus=awful.client.focus.filter, 
+	   [    raise=true, 
+	   [    maximized_vertical=false, 
+	   [    maximized_horizontal=false, 
+	   [    keys=keys_client, 
+	   [    buttons=buttons_client,
+	   [    floating=false,
+	   [    modal=false
+	   [}},]]
 
 		-- calculator
 	{rule={class=app_calc[2]}, properties={
