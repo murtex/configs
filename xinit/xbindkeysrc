@@ -7,6 +7,6 @@
 "amixer set Master toggle; notify-send "Master: $(exec amixer sget Master | awk -F'[][]' '/dB/ { print $6 }')""
 	XF86AudioMute
 
-"amixer set Mic toggle; notify-send "Mic: $(exec amixer sget Mic | awk -F'[][]' '/dB/ { print $6 }')""
+"amixer set Mic toggle; notify-send "Mic: $(exec amixer sget Mic | awk -F'[][]' '/dB/ { print $6 }' | awk 'NR%2{printf "%s/",$0;next}{print;}')""
 	XF86AudioMicMute
 
