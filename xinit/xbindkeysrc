@@ -1,12 +1,12 @@
-"amixer set Master 5%+"
+"amixer set Master 5%+; notify-send "Master: $(exec amixer sget Master | awk -F'[][]' '/dB/ { print $2 }')""
 	XF86AudioRaiseVolume
 
-"amixer set Master 5%-"
+"amixer set Master 5%-; notify-send "Master: $(exec amixer sget Master | awk -F'[][]' '/dB/ { print $2 }')""
 	XF86AudioLowerVolume
 
-"amixer set Master toggle"
+"amixer set Master toggle; notify-send "Master: $(exec amixer sget Master | awk -F'[][]' '/dB/ { print $6 }')""
 	XF86AudioMute
 
-"amixer set Mic toggle"
+"amixer set Mic toggle; notify-send "Master: $(exec amixer sget Mic | awk -F'[][]' '/dB/ { print $6 }')""
 	XF86AudioMicMute
 
