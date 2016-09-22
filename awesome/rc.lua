@@ -469,7 +469,15 @@ awful.rules.rules = {
 		ontop=false,
 		focusable=false,
 		size_hints={"program_position", "program_size"}
-	}}
+	}},
+
+		-- matlab r2015b offscreen figures
+	{rule={name="HG_Peer_OffScreenWindow"}, properties={
+		floating=true,
+		ontop=false,
+		focusable=false
+	}},
+	
 }
 
 	-- signals
