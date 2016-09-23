@@ -1,5 +1,3 @@
-- `ln -s notify $PATH/`
-
 ##### awesome
 - `ln -s . ~/.config`
 
@@ -30,4 +28,8 @@
 
 ##### zsh
 - `ln -s $FILENAME ~/.zshrc`
+
+##### other
+- `ln -s notify $PATH/`
+- `ln -s mailcap ~/.mailcap
 

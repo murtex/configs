@@ -1,0 +1,3 @@
+image/*; xdg-open %s
+application/pdf; xdg-open %s
+
