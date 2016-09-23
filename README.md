@@ -1,3 +1,5 @@
+- `ln -s notify $PATH/`
+
 ##### awesome
 - `ln -s . ~/.config`
 

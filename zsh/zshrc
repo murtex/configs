@@ -85,4 +85,3 @@ alias ftb="~/data/multimc/MultiMC"
 export EDITOR="vim"
 export PAGER="vimpager"
 
-

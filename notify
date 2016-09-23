@@ -1,0 +1,5 @@
+#!/bin/sh
+
+	# send notification via dbus
+dbus-send --session --type=method_call --reply-timeout=10000 --dest=org.freedesktop.Notifications /org/freedesktop/Notifications org.freedesktop.Notifications.Notify string:"app_name" uint32:$1 string:'app_icon' string:"$2" string:"$3" array:string:"" dict:string:string:"","" int32:10000
+

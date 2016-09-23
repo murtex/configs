@@ -1,12 +1,18 @@
-"amixer set Master 5%+; notify-send "Master: $(exec amixer sget Master | awk -F'[][]' '/dB/ { print $2 }')""
+"amixer set Master 5%+; notify 1 amixer "master: $(exec amixer sget Master | awk -F'[][]' '/dB/ { print $2 }')""
 	XF86AudioRaiseVolume
 
-"amixer set Master 5%-; notify-send "Master: $(exec amixer sget Master | awk -F'[][]' '/dB/ { print $2 }')""
+"amixer set Master 5%-; notify 1 amixer "master: $(exec amixer sget Master | awk -F'[][]' '/dB/ { print $2 }')""
 	XF86AudioLowerVolume
 
-"amixer set Master toggle; notify-send "Master: $(exec amixer sget Master | awk -F'[][]' '/dB/ { print $6 }')""
+"amixer set Master toggle; notify 1 amixer "master $(exec amixer sget Master | awk -F'[][]' '/dB/ { print $6 }')""
 	XF86AudioMute
 
-"amixer set Mic toggle; notify-send "Mic: $(exec amixer sget Mic | awk -F'[][]' '/dB/ { print $6 }' | awk 'NR%2{printf "%s/",$0;next}{print;}')""
+"amixer set Mic toggle; notify 2 amixer "mic $(exec amixer sget Mic | awk -F'[][]' '/dB/ { print $6 }' | awk 'NR%2{printf "%s/",$0;next}{print;}')""
 	XF86AudioMicMute
+
+"sleep 0.1; notify 3 backlight "brightness: $(exec cat /sys/class/backlight/acpi_video0/brightness)""
+	XF86MonBrightnessDown
+
+"sleep 0.1; notify 3 backlight "brightness: $(exec cat /sys/class/backlight/acpi_video0/brightness)""
+	XF86MonBrightnessUp
 

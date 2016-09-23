@@ -20,6 +20,7 @@ if beautiful.wallpaper then
 end
 
 	-- notifications
+naughty.config.defaults.position = "bottom_right"
 naughty.config.defaults.font = beautiful.font
 naughty.config.defaults.fg = beautiful.fg_normal
 naughty.config.defaults.bg = beautiful.bg_normal
@@ -40,11 +41,12 @@ function notify_err( err, nid_repl )
 	return nid
 end
 
-function notify_msg ( msg, nid_repl )
+function notify_msg ( title, msg, nid_repl )
 	nid_repl = nid_repl or nil
 	nid = naughty.notify( {
 		preset=naughty.config.presets.normal, 
 		screen=mouse.screen, 
+		title=title,
 		text=msg,
 		replaces_id=nid_repl
 	} ).id
@@ -95,6 +97,7 @@ function launch( cmd, classname )
 			awful.tag.viewonly( matched:tags()[1] )
 			client.focus = matched
 			matched:raise()
+			nid_tags = notify_msg( "tag", awful.tag.selected().name, nid_tags )
 			return
 		end
 	end
@@ -188,7 +191,7 @@ function xrandr_switch()
 		xrandr_cur = 1
 	end
 
-	nid_xrandr = notify_msg( "xrandr: " .. xrandr_state[xrandr_cur][1], nid_xrandr )
+	nid_xrandr = notify_msg( "xrandr", xrandr_state[xrandr_cur][1], nid_xrandr )
 
 	xrandr_timer = timer( {timeout=5} ) -- start timer
 	xrandr_timer:connect_signal( "timeout",
@@ -298,13 +301,13 @@ local keys_global = awful.util.table.join(
 	awful.key( {"Mod4"}, "Left", 
 		function ()
 			awful.tag.viewidx( -1 )
-			nid_tags = notify_msg( "tag: " .. awful.tag.selected().name, nid_tags )
+			nid_tags = notify_msg( "tag", awful.tag.selected().name, nid_tags )
 		end
 	), 
 	awful.key( {"Mod4"}, "Right", 
 		function ()
 			awful.tag.viewidx( 1 )
-			nid_tags = notify_msg( "tag: " .. awful.tag.selected().name, nid_tags )
+			nid_tags = notify_msg( "tag", awful.tag.selected().name, nid_tags )
 		end
 	), 
 
@@ -312,7 +315,7 @@ local keys_global = awful.util.table.join(
 	awful.key( {"Mod4"}, "space",
 		function ()
 			awful.layout.inc( layouts, 1 )
-			nid_layout = notify_msg( "layout: " .. awful.layout.getname(), nid_layout )
+			nid_layout = notify_msg( "layout", awful.layout.getname(), nid_layout )
 		end
 	),
 
@@ -397,7 +400,7 @@ local keys_client = awful.util.table.join(
 				awful.client.movetotag( tags[client.focus.screen][cur-1] )
 			end
 			awful.tag.viewidx( -1 )
-			nid_tags = notify_msg( "tag: " .. awful.tag.selected().name, nid_tags )
+			nid_tags = notify_msg( "tag", awful.tag.selected().name, nid_tags )
 		end
 	),
 	awful.key( {"Mod4", "Shift"}, "Right",
@@ -409,7 +412,7 @@ local keys_client = awful.util.table.join(
 				awful.client.movetotag( tags[client.focus.screen][cur+1] )
 			end
 			awful.tag.viewidx( 1 )
-			nid_tags = notify_msg( "tag: " .. awful.tag.selected().name, nid_tags )
+			nid_tags = notify_msg( "tag", awful.tag.selected().name, nid_tags )
 		end
 	),
 
