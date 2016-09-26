@@ -20,7 +20,7 @@ if beautiful.wallpaper then
 end
 
 	-- notifications
-naughty.config.defaults.position = "bottom_right"
+naughty.config.defaults.position = "top_right"
 naughty.config.defaults.font = beautiful.font
 naughty.config.defaults.fg = beautiful.fg_normal
 naughty.config.defaults.bg = beautiful.bg_normal
