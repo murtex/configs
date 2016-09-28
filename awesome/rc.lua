@@ -66,6 +66,7 @@ local app_webbrowser = {"firefox", "Firefox"}
 local app_mailclient = {"sylpheed", "Sylpheed"}
 local app_calc = {"galculator", "Galculator"}
 local app_dictionary = {"dudenbib", "Dudenbib.bin"}
+local app_pdf = {"qpdfview", "qpdfview"}
 
 	-- conky
 conky_class = "conky"
@@ -261,11 +262,6 @@ local keys_global = awful.util.table.join(
 			launch( app_terminal[1], app_terminal[2] )
 		end
 	),
-	awful.key( {"Mod1", "Shift"}, "t", -- additional terminal command
-		function ()
-			launch( app_terminal[1], app_terminal[2] )
-		end
-	),
 	awful.key( {"Mod4", "Shift"}, "f",
 		function ()
 			launch( app_filemanager[1], app_filemanager[2] )
@@ -294,6 +290,11 @@ local keys_global = awful.util.table.join(
 	awful.key( {"Mod4", "Shift"}, "d",
 		function ()
 			launch( app_dictionary[1], app_dictionary[2] )
+		end
+	),
+	awful.key( {"Mod4", "Shift"}, "q",
+		function ()
+			launch( app_pdf[1], app_pdf[2] )
 		end
 	),
 
