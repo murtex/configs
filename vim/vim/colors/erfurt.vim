@@ -223,7 +223,8 @@ hi PreCondit       guifg=#dfaf8f gui=bold
 hi PreProc         guifg=#ffcfaf gui=bold
 hi Question        guifg=#ffffff gui=bold
 hi Repeat          guifg=#ffd7a7 gui=bold
-hi Search          guifg=#ffffe0 guibg=#284f28
+"hi Search          guifg=#ffffe0 guibg=#284f28
+hi Search       guifg=#f8f893 guibg=#385f38
 hi SpecialChar     guifg=#dca3a3 gui=bold
 hi SpecialComment  guifg=#82a282 gui=bold
 hi Special         guifg=#cfbfaf
@@ -284,7 +285,8 @@ if &t_Co > 255
     hi PreProc         ctermfg=223   cterm=bold
     hi Question        ctermfg=15    cterm=bold
     hi Repeat          ctermfg=223   cterm=bold
-    hi Search          ctermfg=230   ctermbg=236
+    "hi Search          ctermfg=230   ctermbg=236
+    hi Search       ctermfg=228   ctermbg=238
     hi SpecialChar     ctermfg=181   cterm=bold
     hi SpecialComment  ctermfg=108   cterm=bold
     hi Special         ctermfg=181
@@ -341,7 +343,8 @@ if &t_Co > 255
         hi errormsg        ctermbg=237
         hi incsearch       ctermbg=228
         hi linenr          ctermbg=235
-        hi search          ctermbg=238
+        "hi search          ctermbg=238
+        hi search       ctermbg=228
         hi statement       ctermbg=237
         hi statusline      ctermbg=144
         hi statuslinenc    ctermbg=108
