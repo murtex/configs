@@ -11,6 +11,7 @@ set fileformats=unix
 set backupdir=/tmp
 set directory=/tmp
 set breakindent
+set showbreak=..
 
 """ theming
 set t_Co=256
