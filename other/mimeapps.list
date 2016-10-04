@@ -14,3 +14,4 @@ application/x-extension-xht=userapp-Firefox-DB6GNY.desktop
 [Added Associations]
 application/pdf=qpdfview.desktop;
 image/png=qiv.desktop
+image/jpeg=qiv.desktop

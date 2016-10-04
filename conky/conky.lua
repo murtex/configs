@@ -23,6 +23,14 @@ function conky_battery ( s1, s2 )
 	m = string.match( s1, "%a+" )
 	p = string.match( s1, "[0-9]+" )
 	s2 = conky_parse( s2 )
+	s2 = string.gsub( s2, "^0h ", "" )
+	s2 = string.gsub( s2, " [0-9]+s", "" )
 	return m .. ": ${alignr}" .. s2 .. " (" .. p .. "%)"
+end
+
+function conky_despace ( s )
+	s = conky_parse( s )
+	s = string.gsub( s, "b", "bit" )
+	return string.gsub( s, " ", "" )
 end
 
