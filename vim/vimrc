@@ -34,7 +34,8 @@ set hlsearch
 set incsearch
 set ignorecase
 set smartcase
-"map <Space> :noh<cr>
+map <BS> :noh<CR>
+map <SPACE> :/[^\x00-\x7F]<CR>
 
 """ indention
 set backspace=indent,eol,start
