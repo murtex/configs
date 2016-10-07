@@ -1,0 +1,27 @@
+#!/bin/sh
+
+	# get dbus address
+if [ -r "$HOME/.dbus" ] ; then
+	. "$HOME/.dbus"
+fi
+
+	# get battery status
+urgency=${1:-1}
+
+bi=`acpi -b`
+bp=`echo $bi | cut -f 2 -d "," | sed -e 's/^[[:space:]]*//'`
+bt=`echo $bi | cut -f 5 -d " "`
+bth=`echo $bt | awk '{split( $0, a, ":" ); printf( "%dh %dm", a[1], a[2] )}'`
+
+	# send notification
+if [[ "$urgency" -eq 1 ]] ; then
+	if [[ `echo $bi | grep Discharging` ]] ; then
+		/usr/local/bin/notify 5 battery "$bth ($bp)" $urgency
+	fi
+elif [[ "$urgency" -eq 2 ]] ; then
+	if [[ `echo $bi | grep Discharging` && $bt < 02:00:00 ]] ; then
+		/usr/local/bin/notify 6 battery "$bth ($bp)" $urgency
+	fi
+fi
+
+

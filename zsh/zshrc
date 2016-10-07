@@ -85,3 +85,7 @@ alias ftb="~/data/multimc/MultiMC"
 export EDITOR="vim"
 export PAGER="vimpager"
 
+env | grep DBUS_SESSION_BUS_ADDRESS > ~/.dbus
+echo 'export DBUS_SESSION_BUS_ADDRESS' >> ~/.dbus
+chmod 600 ~/.dbus
+

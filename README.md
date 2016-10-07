@@ -33,4 +33,5 @@
 - `ln -s notify $PATH/`
 - `ln -s mailcap ~/.mailcap`
 - `ln -s mimeapps.list ~/.config/`
+- `crontab -e # add batalert`
 
