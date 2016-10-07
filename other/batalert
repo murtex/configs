@@ -11,15 +11,16 @@ urgency=${1:-1}
 bi=`acpi -b`
 bp=`echo $bi | cut -f 2 -d "," | sed -e 's/^[[:space:]]*//'`
 bt=`echo $bi | cut -f 5 -d " "`
-bth=`echo $bt | awk '{split( $0, a, ":" ); printf( "%dm", a[2] )}'`
 
 	# send notification
 if [[ "$urgency" -eq 1 ]] ; then
 	if [[ `echo $bi | grep Discharging` ]] ; then
+		bth=`echo $bt | awk '{split( $0, a, ":" ); printf( "%dh %dm", a[1], a[2] )}'`
 		/usr/local/bin/notify 5 battery "$bth ($bp)" $urgency
 	fi
 elif [[ "$urgency" -eq 2 ]] ; then
 	if [[ `echo $bi | grep Discharging` && $bt < 01:00:00 ]] ; then
+		bth=`echo $bt | awk '{split( $0, a, ":" ); printf( "%dm", a[2] )}'`
 		/usr/local/bin/notify 6 battery "$bth ($bp)" $urgency
 	fi
 fi
