@@ -1,0 +1,19 @@
+#!/bin/sh
+
+status=$(cat /tmp/capslock)
+
+case $status in
+	0)
+		echo 1 > /tmp/capslock
+		notify 7 capslock "on" 2
+		;;
+	1)
+		echo 0 > /tmp/capslock
+		notify 7 capslock "off" 1
+		;;
+	*)
+		echo 1 > /tmp/capslock
+		notify 7 capslock "on" 2
+		;;
+esac
+

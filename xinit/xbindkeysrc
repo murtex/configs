@@ -16,3 +16,6 @@
 "sleep 0.1; notify 3 backlight "brightness: $(exec cat /sys/class/backlight/acpi_video0/brightness)""
 	XF86MonBrightnessUp
 
+"~/projects/configs/other/capsinfo"
+	Caps_Lock
+
