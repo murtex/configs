@@ -66,7 +66,6 @@ set scrollbind
 map <C-h> :execute 'tabmove' tabpagenr()-2<CR>
 map <C-l> :execute 'tabmove' tabpagenr()+1<CR>
 map <C-t> :tabnew<CR>
-map <C-d> :vs<CR>
 
 """ latexsuite
 set grepprg=grep\ -nH\ $*
