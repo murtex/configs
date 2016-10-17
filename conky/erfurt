@@ -1,4 +1,4 @@
-
+# settings
 lua_load ~/.conky.lua # general
 update_interval 2.5
 double_buffer yes
@@ -59,6 +59,7 @@ ${alignc}${time %A, %B %d (%V)}
 
 
 ${alignc}${execpi 600 cal -m | sed -e '1d' -e "s/\<$(date +%-d)\>/\${color1}&\${color}/" -e 's/^/${alignc}/'}
+
 ${alignc}${execpi 600 cal -m $(date --date="next month" +"%m %Y") | sed -e '1d' -e 's/^/${alignc}/'}
 
 ${color1}${lua_parse uppercase ${nodename}} ${hr}${color}
