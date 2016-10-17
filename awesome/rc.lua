@@ -98,7 +98,7 @@ function launch( cmd, classname )
 			awful.tag.viewonly( matched:tags()[1] )
 			client.focus = matched
 			matched:raise()
-			nid_tags = notify_msg( "tag", awful.tag.selected().name, nid_tags )
+			nid_tags = notify_msg( "desktop", awful.tag.selected().name, nid_tags )
 			return
 		end
 	end
@@ -302,13 +302,13 @@ local keys_global = awful.util.table.join(
 	awful.key( {"Mod4"}, "Left", 
 		function ()
 			awful.tag.viewidx( -1 )
-			nid_tags = notify_msg( "tag", awful.tag.selected().name, nid_tags )
+			nid_tags = notify_msg( "desktop", awful.tag.selected().name, nid_tags )
 		end
 	), 
 	awful.key( {"Mod4"}, "Right", 
 		function ()
 			awful.tag.viewidx( 1 )
-			nid_tags = notify_msg( "tag", awful.tag.selected().name, nid_tags )
+			nid_tags = notify_msg( "desktop", awful.tag.selected().name, nid_tags )
 		end
 	), 
 
@@ -401,7 +401,7 @@ local keys_client = awful.util.table.join(
 				awful.client.movetotag( tags[client.focus.screen][cur-1] )
 			end
 			awful.tag.viewidx( -1 )
-			nid_tags = notify_msg( "tag", awful.tag.selected().name, nid_tags )
+			nid_tags = notify_msg( "desktop", awful.tag.selected().name, nid_tags )
 		end
 	),
 	awful.key( {"Mod4", "Shift"}, "Right",
@@ -413,7 +413,7 @@ local keys_client = awful.util.table.join(
 				awful.client.movetotag( tags[client.focus.screen][cur+1] )
 			end
 			awful.tag.viewidx( 1 )
-			nid_tags = notify_msg( "tag", awful.tag.selected().name, nid_tags )
+			nid_tags = notify_msg( "desktop", awful.tag.selected().name, nid_tags )
 		end
 	),
 
