@@ -1,4 +1,2 @@
-image/*; xdg-open %s
-application/pdf; xdg-open %s
-application/vnd.openxmlformats-officedocument.wordprocessingml.document; xdg-open %s
+*/*; xdg-open %s
 
