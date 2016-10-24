@@ -66,7 +66,7 @@ local app_webbrowser = {"firefox", "Firefox"}
 local app_mailclient = {"sylpheed", "Sylpheed"}
 local app_calc = {"galculator", "Galculator"}
 local app_dictionary = {"dudenbib", "Dudenbib.bin"}
-local app_pdf = {"qpdfview", "qpdfview"}
+local app_pdf = {"qpdfview --unique", "qpdfview"}
 
 	-- conky
 conky_class = "conky"
