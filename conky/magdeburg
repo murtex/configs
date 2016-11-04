@@ -35,21 +35,6 @@ default_color dcdccc
 color1 7e9d9e
 color2 dfaf8f
 
-#${endif}\ # wifi backup
-#${if_up wlp0s18f2u4}\
-#wlp0s18f2u4: ${alignr}${addr wlp0s18f2u4}
-#essid: ${alignr}${wireless_essid wlp0s18f2u4}
-#up: (${totalup wlp0s18f2u4} total) ${alignr}${upspeedf wlp0s18f2u4}KiB/s
-#down: (${totaldown wlp0s18f2u4} total) ${alignr}${downspeedf wlp0s18f2u4}KiB/s
-
-#${endif}\
-#${if_up wlp0s18f2u4ap}\
-#wlp0s18f2u4ap: ${alignr}${addr wlp0s18f2u4ap}
-#essid: ${alignr}kickp-ibss
-#up: (${totalup wlp0s18f2u4ap} total) ${alignr}${upspeedf wlp0s18f2u4ap}KiB/s
-#down: (${totaldown wlp0s18f2u4ap} total) ${alignr}${downspeedf wlp0s18f2u4ap}KiB/s
-#${endif}\
-
 # output
 TEXT
 ${color1}${font monospace:size=26}${alignc}${time %I:%M %p}${font}${color}
@@ -94,20 +79,12 @@ ram: (${memmax} total) ${alignr}${lua_parse format %.2f ${mem}}
 ${color1}${membar}${color}
 
 ${color1}NETWORK ${hr}${color}
-${if_up enp2s0}\
-enp2s0: ${alignr}${addr enp2s0}
-up: (${totalup enp2s0} total) ${alignr}${upspeedf enp2s0}KiB/s
-down: (${totaldown enp2s0} total) ${alignr}${downspeedf enp2s0}KiB/s
-
-${endif}\
-${if_up wlp3s0}\
-wlp3s0: ${alignr}${addr wlp3s0}
-essid: ${alignr}${wireless_essid wlp3s0}
+wlp3s0:${alignr}${if_up wlp3s0}${if_up tun0}${addr tun0}${else}${addr wlp3s0}${endif}
+essid: ${alignr}${wireless_essid wlp3s0}${if_up tun0} (vpn)${endif}
 link: ${alignr}${lua_parse despace ${wireless_bitrate wlp3s0}} (${wireless_link_qual_perc wlp3s0}%)
 up: (${totalup wlp3s0} total) ${alignr}${upspeedf wlp3s0}KiB/s
-down: (${totaldown wlp3s0} total) ${alignr}${downspeedf wlp3s0}KiB/s
+down: (${totaldown wlp3s0} total) ${alignr}${downspeedf wlp3s0}KiB/s${else}down${endif}
 
-${endif}\
 ${color1}BATTERY ${hr}${color}
 ${lua_parse battery ${battery BAT0} ${battery_time BAT0}}
 ${color1}${battery_bar BAT0}
