@@ -40,7 +40,7 @@ map <SPACE> :/[^\x00-\x7F]<CR>
 """ indention
 set backspace=indent,eol,start
 set tabstop=4
-autocmd FileType tex setlocal tabstop=2
+autocmd FileType tex :setlocal tabstop=2 shiftwidth=2
 
 filetype plugin indent on
 
