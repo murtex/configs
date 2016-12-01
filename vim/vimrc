@@ -1,15 +1,17 @@
 
 """ commons
 set title
-set nowrap
 set linebreak
 set nolist
 set textwidth=0
-set wrapmargin=0
 set display=lastline
 set fileformats=unix
 set backupdir=/tmp
 set directory=/tmp
+
+""" line wrapping
+set wrap
+set wrapmargin=0
 set breakindent
 set showbreak=..
 
@@ -49,7 +51,7 @@ set cindent
 set shiftwidth=4
 
 """ folding
-set foldmethod=syntax
+set foldmethod=indent
 set foldlevel=99
 
 autocmd FileType conf,vim,lua,python,javascript setlocal foldmethod=indent
