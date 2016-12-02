@@ -105,8 +105,8 @@ nnoremap <C-Left> <S-Left>
 nnoremap <S-Right> ]'
 nnoremap <S-Left> ['
 
-nnoremap <expr> <S-Right> &spell ? ']s' : ']'''
-nnoremap <expr> <S-Left> &spell ? '[s' : '['''
+nnoremap <expr> <S-Right> &spell ? ']s' : 'n'
+nnoremap <expr> <S-Left> &spell ? '[s' : 'N'
 
 " leave insert mode
 function LeaveInsert()
