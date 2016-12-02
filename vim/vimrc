@@ -8,6 +8,7 @@ set display=lastline
 set fileformats=unix
 set backupdir=/tmp
 set directory=/tmp
+set viminfo='100,:100,n~/.viminfo
 
 """ line wrapping
 set wrap
@@ -56,6 +57,7 @@ set foldlevel=99
 
 autocmd FileType conf,vim,lua,python,javascript setlocal foldmethod=indent
 autocmd FileType css setlocal foldmethod=marker
+autocmd FileType tex :setlocal foldlevel=99
 
 let javaScript_fold=1
 
@@ -72,6 +74,8 @@ map <C-t> :tabnew<CR>
 """ latexsuite
 set grepprg=grep\ -nH\ $*
 let g:tex_flavor="latex"
+let g:tex_fold_enabled=1
+let g:tex_comment_nospell=1
 
 """ NERD
 let NERDCompactSexyComs=1
@@ -93,6 +97,16 @@ let mapleader=','
 map <F9> :set wrap!<CR>
 map <C-F9> :set list!<CR>
 map <F12> :setlocal spell! spelllang=de,en<CR>
+
+" moving around
+nnoremap <C-Right> <S-Right>
+nnoremap <C-Left> <S-Left>
+
+nnoremap <S-Right> ]'
+nnoremap <S-Left> ['
+
+nnoremap <expr> <S-Right> &spell ? ']s' : ']'''
+nnoremap <expr> <S-Left> &spell ? '[s' : '['''
 
 " leave insert mode
 function LeaveInsert()

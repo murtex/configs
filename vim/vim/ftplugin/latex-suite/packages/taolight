@@ -1,0 +1,31 @@
+if exists("taolight_package_file")
+	finish
+endif
+let taolight_package_file = 1
+
+let taolight_package =
+\ 'bra:AIG,'
+\.'bra:SRK,'
+\.'bra:person,'
+\.'bra:chapref,'
+\.'bra:secref,'
+\.'bra:figref,'
+\.'bra:tabref'
+
+"syn region tmpi matchgroup=Delimiter start="{" end="}" transparent contains=texTypeStyle,@Spell
+"syn region texTypeStyle matchgroup=texStatement start="\\SRK{" end="}" contains=tmpi,@Spell
+"syn region texTypeStyle matchgroup=texStatement start="\\AIG{" end="}" contains=tmpi,@Spell
+
+syn region texRefZone matchgroup=texStatement start="\\chapref{" end="}\|%stopzone\>" contains=texComment
+syn region texRefZone matchgroup=texStatement start="\\secref{" end="}\|%stopzone\>" contains=texComment
+syn region texRefZone matchgroup=texStatement start="\\figref{" end="}\|%stopzone\>" contains=texComment
+syn region texRefZone matchgroup=texStatement start="\\tabref{" end="}\|%stopzone\>" contains=texComment
+
+syn region tmpii matchgroup=Delimiter start="(" end=")" contained contains=texRefZone
+syn region tmpiii matchgroup=Delimiter start="\[" end="]" contained contains=texRefZone
+syn region texRefZone matchgroup=texStatement start="\\textcite[s]\=" skip="}{\|}\[" end="}" contains=tmpii,tmpiii,texComment
+syn region texRefZone matchgroup=texStatement start="\\posscite[s]\=" skip="}{\|}\[" end="}" contains=tmpii,tmpiii,texComment
+syn region texRefZone matchgroup=texStatement start="\\cite[s]\=" skip="}{\|}\[" end="}" contains=tmpii,tmpiii,texComment
+
+" vim:ft=vim:ff=unix:
+
