@@ -1,22 +1,25 @@
 
 	-- libraries
-awful = require( "awful" )
-awful.rules = require( "awful.rules" )
+local awful = require( "awful" )
 require( "awful.autofocus" )
 
-naughty = require( "naughty" )
-wibox = require( "wibox" )
-beautiful = require( "beautiful" )
-gears = require( "gears" )
+local naughty = require( "naughty" )
+local wibox = require( "wibox" )
+local beautiful = require( "beautiful" )
+local gears = require( "gears" )
+local hotkeys_popup = require( "awful.hotkeys_popup" ).widget
 
 	-- theming
 beautiful.init( "~/.config/awesome/zenburn/theme.lua" )
 
-if beautiful.wallpaper then
-	gears.wallpaper.tiled( beautiful.wallpaper, nil )
-	--[[for i = 1, screen.count() do
-	   [    gears.wallpaper.maximized( beautiful.wallpaper, i, true )
-	   [end]]
+function set_wallpaper( s )
+	if beautiful.wallpaper then
+		local wp = beautiful.wallpaper
+		if type( wp ) == "function" then
+			wp = wp( s )
+		end
+		gears.wallpaper.tiled( wp, s )
+	end
 end
 
 	-- notifications
@@ -98,13 +101,14 @@ function launch( cmd, classname )
 			awful.tag.viewonly( matched:tags()[1] )
 			client.focus = matched
 			matched:raise()
-			nid_tags = notify_msg( "desktop", awful.tag.selected().name, nid_tags )
+			 
+			nid_tags = notify_msg( "desktop", awful.screen.focused().selected_tag.name, nid_tags )
 			return
 		end
 	end
 
 		-- spawn client
-	awful.util.spawn( cmd )
+	awful.spawn( cmd )
 
 end
 
@@ -140,23 +144,21 @@ do
 	)
 end
 
-awful.util.spawn( conky_start )
+awful.spawn( conky_start )
 
-	-- layouts
+	-- tags, layouts
 local layouts = {
     awful.layout.suit.tile.left, -- default
     awful.layout.suit.floating
 }
 
-	-- tags
-local tags = {
-	names = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}
-}
 for i = 1, screen.count() do
-	tags[i] = awful.tag( tags.names, i, layouts[1] )
-	for n = 1, #tags.names do
-		awful.tag.setproperty( tags[i][n], "mwfact", 0.55 )
-	end
+	awful.screen.connect_for_each_screen(
+		function ( s )
+    		set_wallpaper( s )
+			awful.tag( {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}, s, layouts[1] )
+		end
+	)
 end
 
 	-- keyboard layout
@@ -165,9 +167,9 @@ local xkb_cur = 1;
 function xkb_toggle()
 	xkb_cur = 1-xkb_cur; -- toggle state
 	if xkb_cur == 0 then
-		awful.util.spawn_with_shell( "setxkbmap -variant \"\"" )
+		awful.spawn.with_shell( "setxkbmap -variant \"\"" )
 	else
-		awful.util.spawn_with_shell( "setxkbmap -variant nodeadkeys" )
+		awful.spawn.with_shell( "setxkbmap -variant nodeadkeys" )
 	end
 end
 
@@ -200,10 +202,10 @@ function xrandr_switch()
 			xrandr_timer:stop()
 			xrandr_timer = nil
 
-			awful.util.spawn_with_shell( xrandr_state[xrandr_cur][2] )
+			awful.spawn.with_shell( xrandr_state[xrandr_cur][2] )
 
-			awful.util.spawn( conky_stop )
-			awful.util.spawn( conky_start )
+			awful.spawn( conky_stop )
+			awful.spawn( conky_start )
 
 			if beautiful.wallpaper then
 				for i = 1, screen.count() do
@@ -216,8 +218,8 @@ function xrandr_switch()
 end
 
 function screen_shot()
-	--[[awful.util.spawn_with_shell( "maim -s -c 1,0,0,0.6 -p 10 ~/tmp/$(date +%Y%m%d-%H%M%S).png" )]]
-	awful.util.spawn_with_shell( "maim -i $(xdotool getactivewindow) ~/tmp/$(date +%Y%m%d-%H%M%S).png" )
+	--[[awful.spawn.with_shell( "maim -s -c 1,0,0,0.6 -p 10 ~/tmp/$(date +%Y%m%d-%H%M%S).png" )]]
+	awful.spawn.with_shell( "maim -i $(xdotool getactivewindow) ~/tmp/$(date +%Y%m%d-%H%M%S).png" )
 end
 
 	-- mouse bindings
@@ -238,78 +240,93 @@ root.buttons( buttons_global )
 local keys_global = awful.util.table.join(
 
 		-- general
+	awful.key( {"Mod4", "Shift"}, "h", hotkeys_popup.show_help ),
+
 	awful.key( {"Mod4", "Control", "Shift"}, "r",
 		function ()
-			awful.util.spawn( conky_stop )
+			awful.spawn( conky_stop )
 			awesome.restart()
-		end
+		end,
+		{description="reset", group="general"}
 	),
 	awful.key( {"Mod4", "Control", "Shift"}, "q",
 		function ()
-			awful.util.spawn( conky_stop )
+			awful.spawn( conky_stop )
 			awesome.quit()
-		end
+		end,
+		{description="quit", group="general"}
 	),
 
 		-- launchers
 	awful.key( {"Mod4", "Shift"}, "Return",
 		function ()
 			launch( app_prompt[1], app_prompt[2] )
-		end
+		end,
+		{description="prompt", group="launchers"}
 	),
 	awful.key( {"Mod4", "Shift"}, "t",
 		function ()
 			launch( app_terminal[1], app_terminal[2] )
-		end
+		end,
+		{description="terminal", group="launchers"}
 	),
 	awful.key( {"Mod4", "Shift"}, "f",
 		function ()
 			launch( app_filemanager[1], app_filemanager[2] )
-		end
+		end,
+		{description="file manager", group="launchers"}
 	),
 	awful.key( {"Mod4", "Shift"}, "w",
 		function ()
 			launch( app_webbrowser[1], app_webbrowser[2] )
-		end
+		end,
+		{description="web browser", group="launchers"}
 	),
 	awful.key( {"Mod4", "Shift"}, "m",
 		function ()
 			launch( app_mailclient[1], app_mailclient[2] )
-		end
+		end,
+		{description="mail client", group="launchers"}
 	),
 	awful.key( {"Mod4", "Shift"}, "c",
 		function ()
 			launch( app_calc[1], app_calc[2] )
-		end
+		end,
+		{description="calculator", group="launchers"}
 	),
 	awful.key( {"Mod4", "Shift"}, "a",
 		function ()
 			launch( app_audiomanager[1], app_audiomanager[2] )
-		end
+		end,
+		{description="audio manager", group="launchers"}
 	),
 	awful.key( {"Mod4", "Shift"}, "d",
 		function ()
 			launch( app_dictionary[1], app_dictionary[2] )
-		end
+		end,
+		{description="dictionary", group="launchers"}
 	),
 	awful.key( {"Mod4", "Shift"}, "q",
 		function ()
 			launch( app_pdf[1], app_pdf[2] )
-		end
+		end,
+		{description="pdf viewer", group="launchers"}
 	),
 
 		-- tags
 	awful.key( {"Mod4"}, "Left", 
 		function ()
 			awful.tag.viewidx( -1 )
-			nid_tags = notify_msg( "desktop", awful.tag.selected().name, nid_tags )
-		end
+			nid_tags = notify_msg( "desktop", awful.screen.focused().selected_tag.name, nid_tags )
+		end,
+		{description="show previous", group="tags"}
 	), 
 	awful.key( {"Mod4"}, "Right", 
 		function ()
 			awful.tag.viewidx( 1 )
-			nid_tags = notify_msg( "desktop", awful.tag.selected().name, nid_tags )
-		end
+			nid_tags = notify_msg( "desktop", awful.screen.focused().selected_tag.name, nid_tags )
+		end,
+		{description="show next", group="tags"}
 	), 
 
 		-- layout
@@ -317,7 +334,8 @@ local keys_global = awful.util.table.join(
 		function ()
 			awful.layout.inc( layouts, 1 )
 			nid_layout = notify_msg( "layout", awful.layout.getname(), nid_layout )
-		end
+		end,
+		{description="toggle tile/float", group="layout"}
 	),
 
 		-- keyboard
@@ -394,26 +412,28 @@ local keys_client = awful.util.table.join(
 
 	awful.key( {"Mod4", "Shift"}, "Left",
 		function( c )
-			local cur = awful.tag.getidx( c:tags()[1] )
+			local tags = awful.screen.focused().tags
+			local cur = awful.screen.focused().selected_tag.index
 			if cur == 1 then
-				awful.client.movetotag( tags[client.focus.screen][#tags[client.focus.screen]] )
+				c:move_to_tag( tags[#tags] )
 			else
-				awful.client.movetotag( tags[client.focus.screen][cur-1] )
+				c:move_to_tag( tags[cur-1] )
 			end
 			awful.tag.viewidx( -1 )
-			nid_tags = notify_msg( "desktop", awful.tag.selected().name, nid_tags )
+			nid_tags = notify_msg( "desktop", awful.screen.focused().selected_tag.name, nid_tags )
 		end
 	),
 	awful.key( {"Mod4", "Shift"}, "Right",
 		function( c )
-			local cur = awful.tag.getidx( c:tags()[1] )
-			if cur == #tags[client.focus.screen] then
-				awful.client.movetotag( tags[client.focus.screen][1] )
+			local tags = awful.screen.focused().tags
+			local cur = awful.screen.focused().selected_tag.index
+			if cur == #tags then
+				c:move_to_tag( tags[1] )
 			else
-				awful.client.movetotag( tags[client.focus.screen][cur+1] )
+				c:move_to_tag( tags[cur+1] )
 			end
 			awful.tag.viewidx( 1 )
-			nid_tags = notify_msg( "desktop", awful.tag.selected().name, nid_tags )
+			nid_tags = notify_msg( "desktop", awful.screen.focused().selected_tag.name, nid_tags )
 		end
 	),
 
@@ -425,61 +445,41 @@ local keys_client = awful.util.table.join(
 awful.rules.rules = {
 
 		-- general
-	{rule={}, properties={
-		border_width=beautiful.border_width,
-		border_color=beautiful.border_normal,
-		focus=awful.client.focus.filter, 
-		raise=true, 
-		maximized_vertical=false, 
-		maximized_horizontal=false, 
-		keys=keys_client, 
-		buttons=buttons_client
+	{rule = {}, properties = {
+		border_width = beautiful.border_width,
+		border_color = beautiful.border_normal,
+		focus = awful.client.focus.filter, 
+		raise = true, 
+		maximized_vertical = false, 
+		maximized_horizontal = false, 
+		keys = keys_client, 
+		buttons = buttons_client,
+		screen = awful.screen.preferred,
+		placement = awful.placement.no_overlap + awful.placement.no_offscreen
 	}},
 
-		-- qiv
-	--[[{rule={name="qiv"}, properties={
-	   [    border_width=beautiful.border_width,
-	   [    border_color=beautiful.border_normal,
-	   [    focus=awful.client.focus.filter, 
-	   [    raise=true, 
-	   [    maximized_vertical=false, 
-	   [    maximized_horizontal=false, 
-	   [    keys=keys_client, 
-	   [    buttons=buttons_client,
-	   [    floating=false,
-	   [    modal=false
-	   [}},]]
-
 		-- calculator
-	{rule={class=app_calc[2]}, properties={
-		border_width=beautiful.border_width,
-		border_color=beautiful.border_normal,
-		focus=awful.client.focus.filter, 
-		floating=true,
-		raise=true, 
-		ontop=true,
-		maximized_vertical=false, 
-		maximized_horizontal=false, 
-		keys=keys_client, 
-		buttons=buttons_client,
-		size_hints={"program_position", "program_size"}
+	{rule = {class = app_calc[2]}, properties = {
+		floating = true,
+		ontop = true,
+		size_hints = {"program_position", "program_size"}
 	}},
 
 		-- conky
-	{rule={class=conky_class}, properties={
-		border_width=0,
-		floating=true,
-		sticky=true,
-		ontop=false,
-		focusable=false,
-		size_hints={"program_position", "program_size"}
+	{rule = {class = conky_class}, properties = {
+		border_width = 0,
+		floating = true,
+		sticky = true,
+		ontop = false,
+		focusable = false,
+		size_hints = {"program_position", "program_size"}
 	}},
 
 		-- matlab r2015b offscreen figures
-	{rule={name="HG_Peer_OffScreenWindow"}, properties={
-		floating=true,
-		ontop=false,
-		focusable=false
+	{rule = {name = "HG_Peer_OffScreenWindow"}, properties = {
+		floating = true,
+		ontop = false,
+		focusable = false
 	}},
 	
 }
@@ -578,7 +578,7 @@ client.connect_signal( "unfocus",
    [                awful.titlebar.show( c )
    [            end
    [        elseif #client == 0 then -- reset tiling
-   [            awful.tag.setproperty( awful.tag.selected(), "mwfact", 0.5 );
+   [            awful.tag.setproperty( awful.screen.focused().selected_tag, "mwfact", 0.5 );
    [        end
    [    end
    [)]]
