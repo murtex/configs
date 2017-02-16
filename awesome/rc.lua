@@ -458,6 +458,11 @@ awful.rules.rules = {
 		placement = awful.placement.no_overlap + awful.placement.no_offscreen
 	}},
 
+		-- qiv
+	{rule = {name = "qiv"}, properties = {
+		floating = true
+	}},
+
 		-- calculator
 	{rule = {class = app_calc[2]}, properties = {
 		floating = true,

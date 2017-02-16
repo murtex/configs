@@ -1,5 +1,5 @@
 ##### awesome
-- `ln -s . ~/.config`
+- `ln -s . ~/.config/`
 
 ##### conky
 - `ln -s $HOSTNAME ~/.conkyrc`
@@ -11,6 +11,9 @@
 ##### gtk
 - `ln -s $FILENAME /etc/gtk-2.0/gtkrc`
 - `ln -s $FILENAME /etc/gtk-3.0/settings.ini`
+
+##### ranger
+- `ln -s . ~/.config/`
 
 ##### slim
 - `ln -s $FILENAME /usr/share/slim/themes/`
