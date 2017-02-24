@@ -12,6 +12,9 @@
 - `ln -s $FILENAME /etc/gtk-2.0/gtkrc`
 - `ln -s $FILENAME /etc/gtk-3.0/settings.ini`
 
+##### mplayer
+- `ln -s ../mplayer ~/.mplayer`
+
 ##### ranger
 - `ln -s . ~/.config/`
 
