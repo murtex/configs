@@ -463,6 +463,11 @@ awful.rules.rules = {
 		floating = true
 	}},
 
+		-- mplayer
+	--{rule = {name = "MPlayer"}, properties = {
+		--floating = true
+	--}},
+
 		-- calculator
 	{rule = {class = app_calc[2]}, properties = {
 		floating = true,

@@ -15,6 +15,9 @@
 ##### mplayer
 - `ln -s ../mplayer ~/.mplayer`
 
+##### mpv
+- `ln -s . ~/.config/`
+
 ##### ranger
 - `ln -s . ~/.config/`
 
