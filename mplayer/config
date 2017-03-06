@@ -1,3 +1,8 @@
 # Write your default config options here!
 ao=alsa
 loop=0
+msgmodule=1
+msgcolor=1
+mouse-movements=no
+nomouseinput=yes
+

@@ -61,7 +61,8 @@ bindkey '^[[B' down-line-or-search
 # aliases
 alias reload=". ~/.zshrc" # reload zsh (mainly for debugging)
 
-alias vi="vim" # vi improved
+alias vi="nvim" # vim
+alias qiv="qiv -mITlB" # qiv
 
 alias ls="ls --group-directories-first --color=auto -lhv" # colored commands
 alias ll="ls --group-directories-first --color=auto -alhv"
@@ -82,8 +83,8 @@ alias photoresize="~/projects/photo/resize"
 alias ftb="~/data/multimc/MultiMC"
 
 	# environment
-export EDITOR="vim"
-export PAGER="vimpager"
+export EDITOR="nvim"
+export PAGER="nvim -d"
 
 env | grep DBUS_SESSION_BUS_ADDRESS > ~/.dbus
 echo 'export DBUS_SESSION_BUS_ADDRESS' >> ~/.dbus

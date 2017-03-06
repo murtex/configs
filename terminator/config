@@ -1,7 +1,7 @@
 [global_config]
-  enabled_plugins = TerminalShot, Logger, MavenPluginURLHandler
+  enabled_plugins = ,
   focus = system
-  inactive_color_offset = 1.05
+  inactive_color_offset = 1.0
   suppress_multiple_term_dialog = True
   title_transmit_bg_color = "#d30102"
 [keybindings]

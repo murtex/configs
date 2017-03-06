@@ -1,0 +1,1 @@
+/home/kuberski/.vimrc

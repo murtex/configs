@@ -67,8 +67,11 @@ let javaScript_fold=1
 "au FocusGained,BufEnter * :silent! !
 
 """ tabs
-map <C-h> :execute 'tabmove' tabpagenr()-2<CR>
-map <C-l> :execute 'tabmove' tabpagenr()+1<CR>
+"map <C-h> :execute 'tabmove' tabpagenr()-2<CR>
+"map <C-l> :execute 'tabmove' tabpagenr()+1<CR>
+"map <C-h> :execute 'tabmove'<CR>
+map <C-h> :execute 'tabmove -1'<CR>
+map <C-l> :execute 'tabmove +1'<CR>
 map <C-t> :tabnew<CR>
 
 """ latexsuite
