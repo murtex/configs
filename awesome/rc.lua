@@ -223,9 +223,9 @@ function screen_shot()
 end
 
 	-- mouse bindings
-local buttons_global = awful.util.table.join(
+local buttons_global = gears.table.join(
 )
-local buttons_client = awful.util.table.join(
+local buttons_client = gears.table.join(
 	awful.button( {}, 1,
 		function ( c )
 			client.focus = c
@@ -237,7 +237,7 @@ local buttons_client = awful.util.table.join(
 root.buttons( buttons_global )
 
 	-- global keys
-local keys_global = awful.util.table.join(
+local keys_global = gears.table.join(
 
 		-- general
 	awful.key( {"Mod4", "Shift"}, "h", hotkeys_popup.show_help ),
@@ -374,7 +374,7 @@ local keys_global = awful.util.table.join(
 root.keys( keys_global )
 
 	-- client keys
-local keys_client = awful.util.table.join(
+local keys_client = gears.table.join(
 
 		-- layout
 	awful.key( {"Mod4"}, "Return",
@@ -464,9 +464,9 @@ awful.rules.rules = {
 	}},
 
 		-- mplayer
-	--{rule = {name = "MPlayer"}, properties = {
-		--floating = true
-	--}},
+	{rule = {name = "MPlayer"}, properties = {
+		floating = true
+	}},
 
 		-- calculator
 	{rule = {class = app_calc[2]}, properties = {
@@ -516,7 +516,7 @@ client.connect_signal( "manage",
 			widget_title:set_font( beautiful.font )
 			bar_middle:add( widget_title )
 
-			local buttons = awful.util.table.join(
+			local buttons = gears.table.join(
 				awful.button( {}, 1,
 					function ()
 						awful.mouse.client.move( c )

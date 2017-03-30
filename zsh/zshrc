@@ -84,7 +84,7 @@ alias ftb="~/data/multimc/MultiMC"
 
 	# environment
 export EDITOR="nvim"
-export PAGER="nvim -d"
+#export PAGER="nvim -d"
 
 env | grep DBUS_SESSION_BUS_ADDRESS > ~/.dbus
 echo 'export DBUS_SESSION_BUS_ADDRESS' >> ~/.dbus
