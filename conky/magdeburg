@@ -8,7 +8,7 @@ total_run_times 0
 if_up_strictness link
 top_cpu_separate yes
 
-alignment br # geometry
+alignment bottom_right # geometry
 minimum_size 275 300
 border_outer_margin 5
 border_inner_margin 15
@@ -22,7 +22,8 @@ own_window_argb_visual yes
 own_window_argb_value 255
 
 use_xft yes # fonts
-xftfont monospace:size=9
+#xftfont monospace:size=9
+xftfont Liberation Mono:size=8
 xftalpha 1
 
 draw_shades no # design
@@ -41,7 +42,7 @@ ${color1}${font monospace:size=26}${alignc}${time %I:%M %p}${font}${color}
 
 ${alignc}${time %A, %B %d (%V)}
 
-${alignc}${execpi 600 cal -m | sed -e '1d' -e "s/\<$(date +%-d)\>/\${color1}&\${color}/" -e 's/^/${alignc}/'}
+${alignc}${execpi 600 cal -mw | sed -e '1d' -e "s/\<$(date +%-d)\>/\${color1}&\${color}/" -e 's/^/${alignc}/'}
 
 ${color1}${lua_parse uppercase ${nodename}} ${hr}${color}
 uptime: ${alignr}${uptime_short}
@@ -84,6 +85,9 @@ essid: ${alignr}${wireless_essid wlp3s0}${if_up tun0} (vpn)${endif}
 link: ${alignr}${lua_parse despace ${wireless_bitrate wlp3s0}} (${wireless_link_qual_perc wlp3s0}%)
 up: (${totalup wlp3s0} total) ${alignr}${upspeedf wlp3s0}KiB/s
 down: (${totaldown wlp3s0} total) ${alignr}${downspeedf wlp3s0}KiB/s${else}down${endif}
+enp0s25:${alignr}${if_up enp0s25}${if_up tun0}${addr tun0}${else}${addr enp0s25}${endif}
+up: (${totalup enp0s25} total) ${alignr}${upspeedf enp0s25}KiB/s
+down: (${totaldown enp0s25} total) ${alignr}${downspeedf enp0s25}KiB/s${else}down${endif}
 
 ${color1}BATTERY ${hr}${color}
 ${lua_parse battery ${battery BAT0} ${battery_time BAT0}}

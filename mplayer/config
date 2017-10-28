@@ -1,8 +1,11 @@
 # Write your default config options here!
 ao=alsa
 loop=0
+lirc=no
 msgmodule=1
 msgcolor=1
 mouse-movements=no
 nomouseinput=yes
+softvol=yes
+softvol-max=400
 

@@ -43,7 +43,9 @@ map <SPACE> :/[^\x00-\x7F]<CR>
 """ indention
 set backspace=indent,eol,start
 set tabstop=4
+set shiftwidth=4
 autocmd FileType tex :setlocal tabstop=2 shiftwidth=2
+autocmd FileType xml :setlocal tabstop=2 shiftwidth=2
 
 filetype plugin indent on
 
@@ -77,6 +79,7 @@ map <C-t> :tabnew<CR>
 """ latexsuite
 set grepprg=grep\ -nH\ $*
 let g:tex_flavor="latex"
+let g:tex_stylish=1
 let g:tex_fold_enabled=1
 let g:tex_comment_nospell=1
 

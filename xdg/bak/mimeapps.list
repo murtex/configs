@@ -8,3 +8,4 @@ image/tiff=qiv.desktop;
 image/gif=qiv.desktop;
 image/jpeg=qiv.desktop;
 audio/x-wav=audacity.desktop;
+text/markdown=vi-usercreated-1.desktop;

@@ -31,6 +31,11 @@
 - `ln -s $FILENAME ~/.vim`
 - `ln -s $FILENAME ~/.vimrc`
 
+##### xdg
+- `ln -s mailcap ~/.mailcap`
+- `ln -s mimeapps.list ~/.config/`
+- `ln -s applications ~/.local/share/`
+
 ##### xinit
 - `ln -s $HOSTNAME ~/.xinitrc`
 - `ln -s xbindkeysrc ~/.xbindkeysrc`
@@ -40,8 +45,7 @@
 
 ##### other
 - `ln -s notify $PATH/`
-- `ln -s mailcap ~/.mailcap`
-- `ln -s mime* ~/.local/share/applications/
-- `ln -s defaults.list ~/.local/share/applications/
+- `ln -s capsinfo $PATH/`
+- `ln -s batinfo $PATH/`
 - `crontab -e # add batalert`
 

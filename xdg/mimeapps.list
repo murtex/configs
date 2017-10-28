@@ -1,0 +1,17 @@
+[Default Applications]
+image/jpeg=qiv.desktop
+application/pdf=qpdfview.desktop
+image/png=qiv.desktop
+audio/x-wav=audacity.desktop
+video/mpeg=mplayer.desktop
+video/webm=mplayer.desktop
+application/vnd.openxmlformats-officedocument.wordprocessingml.document=libreoffice-writer.desktop
+
+[Added Associations]
+image/jpeg=qiv.desktop;
+application/pdf=qpdfview.desktop;
+image/png=qiv.desktop;
+audio/x-wav=audacity.desktop;
+video/mpeg=mplayer.desktop;
+video/webm=mplayer.desktop;
+application/vnd.openxmlformats-officedocument.wordprocessingml.document=libreoffice-writer.desktop;

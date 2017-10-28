@@ -65,7 +65,7 @@ local app_prompt = {"dmenu_run -b -p \"run: \" -nb \"" .. beautiful.bg_systray .
 local app_terminal = {"terminator", ""}
 local app_filemanager = {"nautilus", ""}
 local app_audiomanager = {"audacious", "Audacious"}
-local app_webbrowser = {"firefox", "Firefox"}
+local app_webbrowser = {"apulse firefox", "Firefox"}
 local app_mailclient = {"sylpheed", "Sylpheed"}
 local app_calc = {"galculator", "Galculator"}
 local app_dictionary = {"dudenbib", "Dudenbib.bin"}
@@ -452,6 +452,7 @@ awful.rules.rules = {
 		raise = true, 
 		maximized_vertical = false, 
 		maximized_horizontal = false, 
+		size_hints_honor = false,
 		keys = keys_client, 
 		buttons = buttons_client,
 		screen = awful.screen.preferred,
@@ -464,9 +465,9 @@ awful.rules.rules = {
 	}},
 
 		-- mplayer
-	{rule = {name = "MPlayer"}, properties = {
-		floating = true
-	}},
+	--{rule = {name = "MPlayer"}, properties = {
+		--floating = true
+	--}},
 
 		-- calculator
 	{rule = {class = app_calc[2]}, properties = {
