@@ -70,6 +70,7 @@ local app_mailclient = {"sylpheed", "Sylpheed"}
 local app_calc = {"galculator", "Galculator"}
 local app_dictionary = {"dudenbib", "Dudenbib.bin"}
 local app_pdf = {"qpdfview --unique", "qpdfview"}
+local app_calendar = {"/home/kuberski/projects/configs/remind/tkremind -m /home/kuberski/.reminders /home/kuberski/.reminders-tk", "Tkremind"}
 
 	-- conky
 conky_class = "conky"
@@ -312,6 +313,12 @@ local keys_global = gears.table.join(
 		end,
 		{description="pdf viewer", group="launchers"}
 	),
+	awful.key( {"Mod4", "Shift"}, "r",
+		function ()
+			launch( app_calendar[1], app_calendar[2] )
+		end,
+		{description="calendar", group="launchers"}
+	),
 
 		-- tags
 	awful.key( {"Mod4"}, "Left", 
@@ -452,11 +459,17 @@ awful.rules.rules = {
 		raise = true, 
 		maximized_vertical = false, 
 		maximized_horizontal = false, 
+		maximized = false,
 		size_hints_honor = false,
 		keys = keys_client, 
 		buttons = buttons_client,
 		screen = awful.screen.preferred,
 		placement = awful.placement.no_overlap + awful.placement.no_offscreen
+	}},
+
+		-- firefox
+	{rule = {name = "firefox"}, properties = {
+		floating = false
 	}},
 
 		-- qiv

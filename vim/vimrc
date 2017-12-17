@@ -1,5 +1,6 @@
 
 """ commons
+set nocompatible
 set title
 set linebreak
 set nolist
@@ -94,6 +95,15 @@ let NERDTreeWinSize=64
 let NERDTreeDirArrows=1
 
 map <F2> :NERDTreeToggle \| :silent NERDTreeMirror<CR>
+
+""" vimwiki
+let g:vimwiki_list=[{'path': '~/public/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
+let g:vimwiki_hl_headers=1
+
+nmap <C-PageUp> <Plug>VimwikiDiaryPrevDay
+nmap <C-PageDown> <Plug>VimwikiDiaryNextDay
+nmap <S-Up> <Plug>VimwikiGoBackLink
+nmap <S-Down> <Plug>VimwikiTabnewLink
 
 """ common keys
 set mouse=a

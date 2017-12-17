@@ -60,8 +60,7 @@ class Default(ColorScheme):
                 else:
                     fg = red
             if not context.selected and (context.cut or context.copied):
-                fg = black
-                attr |= bold
+                attr |= normal
             if context.main_column:
                 if context.selected:
                     attr |= bold
