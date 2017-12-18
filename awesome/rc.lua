@@ -57,7 +57,7 @@ function notify_msg ( title, msg, nid_repl )
 end
 
 local nid_tags = nil
-local nid_xrandr = nil
+--local nid_xrandr = nil
 local nid_layout = nil
 
 	-- variables
@@ -70,7 +70,7 @@ local app_mailclient = {"sylpheed", "Sylpheed"}
 local app_calc = {"galculator", "Galculator"}
 local app_dictionary = {"dudenbib", "Dudenbib.bin"}
 local app_pdf = {"qpdfview --unique", "qpdfview"}
-local app_calendar = {"/home/kuberski/projects/configs/remind/tkremind -m /home/kuberski/.reminders /home/kuberski/.reminders-tk", "Tkremind"}
+local app_calendar = {"/home/kuberski/projects/configs/remind/tkremind -m /home/kuberski/.reminders/ /home/kuberski/.reminders/101-tkproc.rem", "Tkremind"}
 
 	-- conky
 conky_class = "conky"
@@ -175,48 +175,48 @@ function xkb_toggle()
 end
 
 	-- display, TODO: avoid hard-coding!
-local xrandr_cur = 1
-local xrandr_timer = nil
-local xrandr_mode = "`xrandr --query | awk '/^ *[0-9]*x[0-9]*/{ print $1 }' | sort -n | uniq -d | tail -1`"
-local xrandr_state = {{}}
-xrandr_state[1] = {"intern only", "xrandr --output VIRTUAL1 --off --output LVDS1 --mode 1366x768 --pos 0x0 --rotate normal --output VGA1 --off"}
-xrandr_state[2] = {"extern only", xrandr_state[1][2] .. "; xrandr --output LVDS1 --off --output VGA1 --auto --pos 0x0 --rotate normal"}
-xrandr_state[3] = {"cloned min", xrandr_state[1][2] .. "; xrandr --output LVDS1 --mode " .. xrandr_mode .. " --pos 0x0 --rotate normal --output VGA1 --mode " .. xrandr_mode .. " --pos 0x0 --rotate normal"}
-xrandr_state[4] = {"cloned max", xrandr_state[1][2] .. "; xrandr --output VGA1 --auto --pos 0x0 --rotate normal"}
+--local xrandr_cur = 1
+--local xrandr_timer = nil
+--local xrandr_mode = "`xrandr --query | awk '/^ *[0-9]*x[0-9]*/{ print $1 }' | sort -n | uniq -d | tail -1`"
+--local xrandr_state = {{}}
+--xrandr_state[1] = {"intern only", "xrandr --output VIRTUAL1 --off --output LVDS1 --mode 1366x768 --pos 0x0 --rotate normal --output VGA1 --off"}
+--xrandr_state[2] = {"extern only", xrandr_state[1][2] .. "; xrandr --output LVDS1 --off --output VGA1 --auto --pos 0x0 --rotate normal"}
+--xrandr_state[3] = {"cloned min", xrandr_state[1][2] .. "; xrandr --output LVDS1 --mode " .. xrandr_mode .. " --pos 0x0 --rotate normal --output VGA1 --mode " .. xrandr_mode .. " --pos 0x0 --rotate normal"}
+--xrandr_state[4] = {"cloned max", xrandr_state[1][2] .. "; xrandr --output VGA1 --auto --pos 0x0 --rotate normal"}
 
-function xrandr_switch()
-	if xrandr_timer then -- stop timer
-		xrandr_timer:stop()
-		xrandr_timer = nil
-	end
+--function xrandr_switch()
+	--if xrandr_timer then -- stop timer
+		--xrandr_timer:stop()
+		--xrandr_timer = nil
+	--end
 
-	xrandr_cur = xrandr_cur+1 -- switch state
-	if xrandr_cur > #xrandr_state then
-		xrandr_cur = 1
-	end
+	--xrandr_cur = xrandr_cur+1 -- switch state
+	--if xrandr_cur > #xrandr_state then
+		--xrandr_cur = 1
+	--end
 
-	nid_xrandr = notify_msg( "xrandr", xrandr_state[xrandr_cur][1], nid_xrandr )
+	--nid_xrandr = notify_msg( "xrandr", xrandr_state[xrandr_cur][1], nid_xrandr )
 
-	xrandr_timer = timer( {timeout=5} ) -- start timer
-	xrandr_timer:connect_signal( "timeout",
-		function()
-			xrandr_timer:stop()
-			xrandr_timer = nil
+	--xrandr_timer = timer( {timeout=5} ) -- start timer
+	--xrandr_timer:connect_signal( "timeout",
+		--function()
+			--xrandr_timer:stop()
+			--xrandr_timer = nil
 
-			awful.spawn.with_shell( xrandr_state[xrandr_cur][2] )
+			--awful.spawn.with_shell( xrandr_state[xrandr_cur][2] )
 
-			awful.spawn( conky_stop )
-			awful.spawn( conky_start )
+			--awful.spawn( conky_stop )
+			--awful.spawn( conky_start )
 
-			if beautiful.wallpaper then
-				for i = 1, screen.count() do
-					gears.wallpaper.tiled( beautiful.wallpaper, i )
-				end
-			end
-		end
-	)
-	xrandr_timer:start()
-end
+			--if beautiful.wallpaper then
+				--for i = 1, screen.count() do
+					--gears.wallpaper.tiled( beautiful.wallpaper, i )
+				--end
+			--end
+		--end
+	--)
+	--xrandr_timer:start()
+--end
 
 function screen_shot()
 	--[[awful.spawn.with_shell( "maim -s -c 1,0,0,0.6 -p 10 ~/tmp/$(date +%Y%m%d-%H%M%S).png" )]]
@@ -349,7 +349,7 @@ local keys_global = gears.table.join(
 	awful.key( {"Mod4"}, "l", xkb_toggle ),
 
 		-- display
-	awful.key( {}, "XF86Display", xrandr_switch ),
+	--awful.key( {}, "XF86Display", xrandr_switch ),
 	awful.key( {"Mod4"}, "p", screen_shot ),
 
 		-- conky
