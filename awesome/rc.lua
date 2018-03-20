@@ -57,8 +57,8 @@ function notify_msg ( title, msg, nid_repl )
 end
 
 local nid_tags = nil
---local nid_xrandr = nil
 local nid_layout = nil
+--local nid_xrandr = nil
 
 	-- variables
 local app_prompt = {"dmenu_run -b -p \"run: \" -nb \"" .. beautiful.bg_systray .."\" -nf \"" .. beautiful.fg_normal .. "\" -sb \"" .. beautiful.bg_focus .. "\" -sf \"" .. beautiful.fg_focus .. "\" -fn \"Liberation Mono-9\"", ""}
@@ -66,11 +66,13 @@ local app_terminal = {"terminator", ""}
 local app_filemanager = {"nautilus", ""}
 local app_audiomanager = {"audacious", "Audacious"}
 local app_webbrowser = {"apulse firefox", "Firefox"}
+local app_messenger = {"apulse skypeforlinux", "Skype"}
 local app_mailclient = {"sylpheed", "Sylpheed"}
 local app_calc = {"galculator", "Galculator"}
 local app_dictionary = {"dudenbib", "Dudenbib.bin"}
 local app_pdf = {"qpdfview --unique", "qpdfview"}
 local app_calendar = {"/home/kuberski/projects/configs/remind/tkremind -m /home/kuberski/.reminders/ /home/kuberski/.reminders/101-tkproc.rem", "Tkremind"}
+local app_editor = {"gedit", "Gedit"}
 
 	-- conky
 conky_class = "conky"
@@ -271,6 +273,12 @@ local keys_global = gears.table.join(
 		end,
 		{description="terminal", group="launchers"}
 	),
+	awful.key( {"Mod4", "Shift"}, "e",
+		function ()
+			launch( app_editor[1], app_editor[2] )
+		end,
+		{description="editor", group="launchers"}
+	),
 	awful.key( {"Mod4", "Shift"}, "f",
 		function ()
 			launch( app_filemanager[1], app_filemanager[2] )
@@ -280,6 +288,12 @@ local keys_global = gears.table.join(
 	awful.key( {"Mod4", "Shift"}, "w",
 		function ()
 			launch( app_webbrowser[1], app_webbrowser[2] )
+		end,
+		{description="web browser", group="launchers"}
+	),
+	awful.key( {"Mod4", "Shift"}, "s",
+		function ()
+			launch( app_messenger[1], app_messenger[2] )
 		end,
 		{description="web browser", group="launchers"}
 	),

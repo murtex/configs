@@ -49,7 +49,7 @@ hi Delimiter			guifg=#8f8f8f										ctermfg=245
 hi DiffAdd				guifg=#709080	guibg=#313c36	gui=bold			ctermfg=66		ctermbg=237		cterm=bold
 hi DiffChange							guibg=#333333										ctermbg=236
 hi DiffDelete			guifg=#333333	guibg=#464646						ctermfg=236		ctermbg=238
-hi DiffText				guifg=#ecbcbc	guibg=#41363c	gui=bold			ctermfg=217		ctermbg=237		cterm=bold
+hi DiffText				guifg=#0cbcbc	guibg=#41363c	gui=bold			ctermfg=217		ctermbg=237		cterm=bold
 hi Directory			guifg=#dcdccc					gui=bold			ctermfg=188						cterm=bold
 hi Error				guifg=#ef9f9f	guibg=#201010	gui=bold  
 hi ErrorMsg				guifg=#80d4aa	guibg=#2f2f2f	gui=bold			ctermfg=115		ctermbg=236		cterm=bold

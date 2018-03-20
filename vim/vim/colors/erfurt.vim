@@ -265,7 +265,7 @@ if &t_Co > 255
     hi DiffAdd         ctermfg=66    ctermbg=237     cterm=bold
     hi DiffChange      ctermbg=236
     hi DiffDelete      ctermfg=236   ctermbg=238
-    hi DiffText        ctermfg=217   ctermbg=237     cterm=bold
+    hi DiffText        ctermfg=52   ctermbg=242     cterm=bold
     hi Directory       ctermfg=109   cterm=bold
     hi ErrorMsg        ctermfg=115   ctermbg=236     cterm=bold
     hi Exception       ctermfg=249   cterm=bold

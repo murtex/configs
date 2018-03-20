@@ -23,6 +23,10 @@ xmodmap -e "keycode 94 = acute grave acute grave cedilla cedilla cedilla"
 
 xbindkeys
 
+	# touchpad
+#xinput --set-prop 11 'libinput Accel Speed' 0.5
+#xinput --set-prop 11 'libinput Tapping Drag Enabled' 0
+
 	# gtk
 export GTK_OVERLAY_SCROLLING=0
 

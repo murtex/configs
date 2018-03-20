@@ -15,6 +15,39 @@ import os
 # You always need to import ranger.api.commands here to get the Command class:
 from ranger.api.commands import Command
 
+# mounting
+class mount(Command):
+    """:mount <filename>
+
+    mount filename
+    """
+
+    def execute(self):
+        if self.arg(1):
+            cmd = ["mount"]
+            cmd.append(self.arg(1))
+            self.fm.execute_command(cmd)
+            self.fm.notify("mounted")
+
+    def tab(self, tabnum):
+        return self._tab_directory_content()
+
+class umount(Command):
+    """:umount <filename>
+
+    unmount filename
+    """
+
+    def execute(self):
+        if self.arg(1):
+            cmd = ["umount"]
+            cmd.append(self.arg(1))
+            self.fm.execute_command(cmd)
+            self.fm.notify("unmounted")
+
+    def tab(self, tabnum):
+        return self._tab_directory_content()
+
 
 # Any class that is a subclass of "Command" will be integrated into ranger as a
 # command.  Try typing ":my_edit<ENTER>" in ranger!
